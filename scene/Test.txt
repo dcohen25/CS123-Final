@@ -1,0 +1,160 @@
+#include "snowscene.h"
+
+#include "GL/glew.h"
+#include <QGLWidget>
+#include "camera/camera.h"
+#include "ui/view.h"
+#include "lib/resourceloader.h"
+#include "glm.hpp"
+#include "lib/cs123scenedata.h"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtx/transform.hpp"
+#include "gl/shaders/CS123Shader.h"
+#include <iostream>
+
+using namespace CS123::GL;
+
+SnowScene::SnowScene() :
+    OpenGLScene()
+{
+    initScene();
+}
+
+SnowScene::~SnowScene()
+{
+}
+
+void SnowScene::loadPhongShader() {
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/default.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/default.frag");
+    m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
+}
+
+void SnowScene::render(View *context) {
+    setClearColor();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    m_phongShader->bind();
+    setSceneUniforms(context);
+    setLights();
+    renderGeometry();
+    glBindTexture(GL_TEXTURE_2D, 0);
+    m_phongShader->unbind();
+}
+
+void SnowScene::setSceneUniforms(View *context) {
+    Camera *camera = context->getCamera();
+    m_phongShader->setUniform("useLighting", true);
+    m_phongShader->setUniform("useArrowOffsets", false);
+    m_phongShader->setUniform("p" , camera->getProjectionMatrix());
+    m_phongShader->setUniform("v", camera->getViewMatrix());
+//    m_phongShader->setUniform("allBlack", glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
+void SnowScene::setLights()
+{
+    // TODO: [SCENEVIEW] Fill this in...
+    //
+    // Set up the lighting for your scene using m_phongShader.
+    // The lighting information will most likely be stored in CS123SceneLightData structures.
+    //
+    for (int i = 0; i < m_lights.size(); i++){
+        m_phongShader->setLight(m_lights[i]);
+    }
+}
+
+// Initialize Scene
+void SnowScene::initScene(){
+    loadPhongShader();
+    initPrimitives();
+    initTransformations();
+    initLights();
+    initGlobals();
+    initShapes();
+}
+
+void SnowScene::initPrimitives(){
+    initTreePrimitives();
+}
+
+void SnowScene::initTransformations(){
+    initTreeTransformations();
+}
+
+void SnowScene::initTreePrimitives(){
+    for (int i = 0; i < numTrees; i++){
+        CS123ScenePrimitive tree = makeTree();
+        m_primitives.push_back(tree);
+    }
+}
+
+CS123ScenePrimitive SnowScene::makeTree(){
+    CS123ScenePrimitive tree;
+    tree.type = PrimitiveType::PRIMITIVE_CONE;
+    tree.material.clear();
+    tree.material.cAmbient.g = .3f;
+    tree.material.cDiffuse.g = 1.f;
+    tree.material.cSpecular.r = tree.material.cSpecular.g = tree.material.cSpecular.b = 1;
+    tree.material.shininess = 64;
+
+    return tree;
+}
+
+void SnowScene::initTreeTransformations(){
+    for (int i = 0; i < m_numTrees; i++){
+        glm::mat4x4 transformation = computeTreeTransformation();
+        m_transformations.push_back(transformation);
+    }
+}
+
+glm::vec4 SnowScene::getRandomObjectPosition(){
+    glm::vec4 pos;
+    pos.x = ((float) rand() / RAND_MAX) * m_sceneWidth - (m_xSize / 2.f);
+    pos.y = 0.f;
+    pos.z = ((float) rand() / RAND_MAX) * m_sceneLength  - (m_zSize / 2.f);
+    pos.w = 1.f;
+    return pos;
+}
+
+glm::mat4x4 Snowscene::computeTreeTransformation(){
+    glm::mat4x4 treeTransformation;
+    glm::vec3 treePosition = getRandomObjectPosition();
+    treeTransformation = glm::translate(treeTransformation, treePosition);
+    return treeTransformation;
+}
+
+void SnowScene::initLights(){
+    for (int i = 0; i < m_numLights; i++){
+        CS123SceneLightData light = makeLight(i);
+        m_lights.push_back(light);
+    }
+}
+
+void SnowScene::makeLight(int id){
+    CS123SceneLightData light;
+    memset(&light, 0, sizeof(light));
+    light.type = LightType::LIGHT_POINT;
+    light.pos = getRandomObjectPosition();
+    light.color.r = light.color.g = light.color.b = 1;
+    light.id = i;
+}
+
+void SnowScene::initGlobals(){
+
+}
+
+void SnowScene::renderGeometry() {
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    // TODO: [SCENEVIEW] Fill this in...
+    // You shouldn't need to write *any* OpenGL in this class!
+    //
+    //
+    // This is where you should render the geometry of the scene. Use what you
+    // know about OpenGL and leverage your Shapes classes to get the job done.
+    //
+    for (int i = 0; i < m_primitives.size(); i++){
+        m_phongShader->setUniform("m", m_transformations[i]);
+        m_phongShader->applyMaterial(m_primitives[i].material);
+        m_shapes[m_primitives[i].type]->draw();
+    }
+}

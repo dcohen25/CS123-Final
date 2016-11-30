@@ -1,0 +1,79 @@
+#ifndef SNOWSCENE_H
+#define SNOWSCENE_H
+
+#include "scene/openglscene.h"
+
+#include <memory>
+#include <map>
+
+namespace CS123 { namespace GL {
+
+    class CS123Shader;
+    class Texture2D;
+}}
+
+/**
+ *
+ * @class SceneviewScene
+ *
+ * A complex scene consisting of multiple objects. Students will implement this class in the
+ * Sceneview assignment.
+ *
+ * Here you will implement your scene graph. The structure is up to you - feel free to create new
+ * classes and data structures as you see fit. We are providing this SceneviewScene class for you
+ * to use as a stencil if you like.
+ *
+ * Keep in mind that you'll also be rendering entire scenes in the next two assignments, Intersect
+ * and Ray. The difference between this assignment and those that follow is here, we are using
+ * OpenGL to do the rendering. In Intersect and Ray, you will be responsible for that.
+ */
+class SnowScene : public OpenGLScene {
+public:
+    SnowScene();
+    virtual ~SnowScene();
+
+    virtual void render(View *context) override;
+
+    // Use this method to set an internal selection, based on the (x, y) position of the mouse
+    // pointer.  This will be used during the "modeler" lab, so don't worry about it for now.
+    void setSelection(int x, int y);
+
+private:
+
+    void loadPhongShader();
+    void setSceneUniforms(View *context);
+    void setLights();
+    void renderGeometry();
+
+    // initialize scene
+    void initScene();
+    void initPrimitives();
+    void initTransformations();
+    void initLights();
+    void initGlobals();
+
+    void initTreePrimitives();
+    void initSnowmanPrimitives();
+
+    void initTreeTransformations();
+    void initSnowmanTransformations();
+
+    glm::mat4x4 computeTreeTransformation();
+
+    CS123ScenePrimitive makeTree();
+    CS123SceneLightData makeLight(int id);
+
+    glm::vec4 getRandomObjectPosition();
+
+    int m_numTrees = 10;
+    int m_numSnowmen = 2;
+    int m_numLights = 10;
+    float m_sceneWidth = 50.f;
+    float m_sceneHeight = 50.f;
+    float m_sceneLength = 50.f;
+
+    std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
+
+};
+
+#endif // SCENEVIEWSCENE_H
