@@ -3177,6 +3177,7 @@ snowscene.o: scene/snowscene.cpp scene/snowscene.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		scene/snowscenetile.h \
+		camera/camera.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtOpenGL/QGLWidget \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtOpenGL/qgl.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtGui/qopengl.h \
@@ -3298,7 +3299,6 @@ snowscene.o: scene/snowscene.cpp scene/snowscene.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtOpenGL/qtopenglglobal.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtGui/QSurfaceFormat \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtGui/qsurfaceformat.h \
-		camera/camera.h \
 		ui/view.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/QTime \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/qdatetime.h \
@@ -3526,7 +3526,6 @@ snowscenetile.o: scene/snowscenetile.cpp scene/snowscenetile.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtOpenGL/qtopenglglobal.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtGui/QSurfaceFormat \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtGui/qsurfaceformat.h \
-		camera/camera.h \
 		ui/view.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/QTime \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/qdatetime.h \
@@ -3534,6 +3533,7 @@ snowscenetile.o: scene/snowscenetile.cpp scene/snowscenetile.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/qtimer.h \
 		../../../../../sys/shared/psfu/contrib/projects/qt5.2.0/5.2.0/gcc_64/include/QtCore/qbasictimer.h \
 		camera/camtranscamera.h \
+		camera/camera.h \
 		scene/openglscene.h \
 		scene/scene.h \
 		shape/opengl/openglshape.h \
@@ -3546,8 +3546,6 @@ snowscenetile.o: scene/snowscenetile.cpp scene/snowscenetile.h \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
 		glm/gtx/transform.inl \
-		gl/shaders/CS123Shader.h \
-		gl/shaders/Shader.h \
 		glm/gtx/string_cast.hpp \
 		glm/gtx/integer.hpp \
 		glm/gtx/integer.inl \

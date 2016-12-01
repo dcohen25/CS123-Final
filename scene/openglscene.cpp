@@ -20,8 +20,8 @@ void OpenGLScene::setClearColor() {
 }
 
 void OpenGLScene::initShapes(){
-    m_shapes[PrimitiveType::PRIMITIVE_CUBE] = std::make_unique<Cube>(1, 50, glm::mat4x4());
-    m_shapes[PrimitiveType::PRIMITIVE_CONE] = std::make_unique<Cone>(1, 1, 50, 50, glm::mat4x4());
-    m_shapes[PrimitiveType::PRIMITIVE_SPHERE] = std::make_unique<Sphere>(.5, 50, 50, glm::mat4x4());
-    m_shapes[PrimitiveType::PRIMITIVE_CYLINDER] = std::make_unique<Cylinder>(1, 1, 50, 50, glm::mat4x4());
+    m_shapes[PrimitiveType::PRIMITIVE_CUBE] = std::make_unique<Cube>(1, 40, glm::mat4x4());
+    m_shapes[PrimitiveType::PRIMITIVE_CONE] = std::make_unique<Cone>(1, 1, 40, 40, glm::mat4x4());
+    m_shapes[PrimitiveType::PRIMITIVE_SPHERE] = std::make_unique<Sphere>(.5, 40, 40, glm::mat4x4());
+    m_shapes[PrimitiveType::PRIMITIVE_CYLINDER] = std::make_unique<Cylinder>(1, 1, 40, 40, glm::mat4x4());
 }

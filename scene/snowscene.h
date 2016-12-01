@@ -59,7 +59,7 @@ private:
     int m_numLights = 10;
     float m_treeRadius = 9.f;
     float m_snowmanRadius = .3f;
-    float m_gridSize = 15.f;
+    float m_gridSize = 50.f;
     glm::vec3 m_currentTile;
 };
 
