@@ -7,7 +7,7 @@
 #include <QTimer>
 #include "camera/camtranscamera.h"
 #include "scene/openglscene.h"
-#include "scene/snowscene.h"
+#include "scene/snowscene/snowscene.h"
 
 class View : public QGLWidget
 {
@@ -19,6 +19,7 @@ public:
 
     Camera *getCamera();
     OpenGLScene *getScene();
+    void resizeGL(int w, int h);
 
 private:
     QTime m_time;
@@ -27,7 +28,6 @@ private:
 
     void initializeGL() override;
     void paintGL() override;
-    void resizeGL(int w, int h);
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

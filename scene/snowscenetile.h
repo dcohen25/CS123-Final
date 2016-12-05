@@ -2,59 +2,33 @@
 #define SNOWSCENETILE_H
 
 #include <glm/glm.hpp>
+#include "openglscenetile.h"
 #include "lib/cs123scenedata.h"
+#include "openglsceneobject.h"
 
-class SnowSceneTile
+class SnowSceneTile : public OpenGLSceneTile
 {
 public:
-    SnowSceneTile(float x, float y, int numTrees, int numSnowmen, float treeRadius, float snowmanRadius, float gridSize);
+    SnowSceneTile(glm::vec3 coords, float size, int numTrees, int numSnowmen, float treeRadius, float snowmanRadius, float maxSnowmanHeight, float maxTreeHeight);
     SnowSceneTile();
     ~SnowSceneTile();
 
-    std::vector<CS123ScenePrimitive> getPrimitives();
-    std::vector<glm::mat4x4> getTransformations();
-
-private:
+protected:
     // initialize scene
     void initScene();
-    void initPrimitives();
-    void initTransformations();
-    void initLights();
-    void initGlobals();
 
-    void initTreePrimitives();
-    void initSnowmanPrimitives();
-    void initSnowPrimitive();
+    void initTrees();
+    void initSnowmen();
+    void initSnow();
 
-    void initTreeTransformations();
-    void initSnowmanTransformations();
-    void initSnowTransformation();
-
-    glm::mat4x4 computeTreeTransformation();
-    std::vector<glm::mat4x4> computeSnowmanTransformation();
-    glm::mat4x4 computeSnowmanTopTransformation();
-    glm::mat4x4 computeSnowmanMiddleTransformation();
-    glm::mat4x4 computeSnowmanBottomTransformation();
-    glm::mat4x4 computeSnowTransformation();
-
-    CS123ScenePrimitive makeTree();
-    std::vector<CS123ScenePrimitive> makeSnowman();
-    CS123ScenePrimitive makeSnowmanSphere();
-    CS123ScenePrimitive makeSnow();
-    CS123SceneLightData makeLight(int id);
-
-    glm::vec2 m_coords;
-
-    glm::vec3 getRandomObjectPosition();
-
-    std::vector<CS123ScenePrimitive> m_primitives;
-    std::vector<glm::mat4x4> m_transformations;
+    void setRandomPositionOnTile(OpenGLSceneObject &object);
 
     int m_numTrees;
     int m_numSnowmen;
     float m_treeRadius;
     float m_snowmanRadius;
-    float m_gridSize;
+    float m_maxSnowmanHeight;
+    float m_maxTreeHeight;
 };
 
 #endif // SNOWSCENETILE_H

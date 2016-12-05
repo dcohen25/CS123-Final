@@ -14,9 +14,14 @@
 #include "glm/gtx/string_cast.hpp"
 using namespace CS123::GL;
 
-SnowScene::SnowScene() :
-    OpenGLScene(),
-    m_currentTile(0, 0, 0)
+SnowScene::SnowScene(float size, int radius, int numTrees, int numSnowmen, float treeRadius, float snowmanRadius, float maxTreeHeight, float maxSnowmanHeight) :
+    OpenGLScene(SnowSceneTile(glm::vec3(0, 0, 0), size, numTrees, numSnowmen, treeRadius, snowmanRadius, maxTreeHeight, maxSnowmanHeight), radius),
+    m_numTrees(numTrees),
+    m_numSnowmen(numSnowmen),
+    m_treeRadius(treeRadius),
+    m_snowmanRadius(snowmanRadius),
+    m_maxSnowmanHeight(maxSnowmanHeight),
+    m_maxTreeHeight(maxTreeHeight)
 {
     loadPhongShader();
     initLights();
@@ -24,6 +29,11 @@ SnowScene::SnowScene() :
 
 SnowScene::~SnowScene()
 {
+}
+
+
+OpenGLSceneTile SnowScene::makeSceneTile(glm::vec3 coords, float size){
+    return SnowSceneTile(coords, size, m_numTrees, m_numSnowmen, m_treeRadius, m_snowmanRadius, m_maxTreeHeight, m_maxSnowmanHeight);
 }
 
 void SnowScene::loadPhongShader() {
@@ -40,47 +50,11 @@ void SnowScene::render(View *context) {
     m_phongShader->bind();
     setSceneUniforms(context);
     setLights();
-    renderScene();
+    renderScene(m_phongShader);
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 }
 
-void SnowScene::updateScene(){
-    for (int i = -1; i <= 1; i++){
-        for (int j = -1; j <= 1; j++){
-            int x = m_currentTile.x + (j * m_gridSize);
-            int z = m_currentTile.z + (i * m_gridSize);
-            if (m_sceneMap.count(z) == 0 || m_sceneMap[z].count(x) == 0){
-                m_sceneMap[z][x] = SnowSceneTile(x, z, m_numTrees, m_numSnowmen, m_treeRadius, m_snowmanRadius, m_gridSize);
-            }
-        }
-    }
-}
-
-void SnowScene::renderScene(){
-    for (int i = -1; i <= 1; i++){
-        for (int j = -1; j <= 1; j++){
-            int x = m_currentTile.x + (j * m_gridSize);
-            int z = m_currentTile.z + (i * m_gridSize);
-            renderSceneTile(m_sceneMap[z][x]);
-        }
-    }
-}
-
-void SnowScene::updateCurrentTile(glm::vec4 eye){
-    if (eye.x > m_currentTile.x + m_gridSize / 2){
-        m_currentTile.x += m_gridSize;
-    }
-    else if (eye.x < m_currentTile.x - m_gridSize / 2){
-        m_currentTile.x -= m_gridSize;
-    }
-    else if (eye.z > m_currentTile.z + m_gridSize / 2){
-        m_currentTile.z += m_gridSize;
-    }
-    else if (eye.z < m_currentTile.z - m_gridSize / 2){
-        m_currentTile.z -= m_gridSize;
-    }
-}
 
 void SnowScene::setSceneUniforms(View *context) {
     Camera *camera = context->getCamera();
@@ -118,20 +92,4 @@ CS123SceneLightData SnowScene::makeLight(int id){
     light.color.r = light.color.g = light.color.b = 1;
     light.id = id;
     return light;
-}
-
-void SnowScene::renderSceneTile(SnowSceneTile tile) {
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    // TODO: [SCENEVIEW] Fill this in...
-    // You shouldn't need to write *any* OpenGL in this class!
-    //
-    //
-    // This is where you should render the geometry of the scene. Use what you
-    // know about OpenGL and leverage your Shapes classes to get the job done.
-    //
-    for (int i = 0; i < tile.getPrimitives().size(); i++){
-        m_phongShader->setUniform("m", tile.getTransformations()[i]);
-        m_phongShader->applyMaterial(tile.getPrimitives()[i].material);
-        m_shapes[tile.getPrimitives()[i].type]->draw();
-    }
 }

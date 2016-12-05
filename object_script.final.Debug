@@ -4,10 +4,7 @@ INPUT(
 ./debug\glew.o
 ./debug\view.o
 ./debug\viewformat.o
-./debug\orbitingcamera.o
-./debug\snowscene.o
 ./debug\openglscene.o
-./debug\scene.o
 ./debug\resourceloader.o
 ./debug\Shader.o
 ./debug\GLDebug.o
@@ -32,6 +29,14 @@ INPUT(
 ./debug\sphere.o
 ./debug\cylinder.o
 ./debug\openglshape.o
+./debug\camtranscamera.o
+./debug\snowscene.o
+./debug\snowscenetile.o
+./debug\tree.o
+./debug\utils.o
+./debug\snowman.o
+./debug\snow.o
+./debug\snowsceneobject.o
 ./debug\qrc_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_view.o

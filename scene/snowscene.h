@@ -31,36 +31,34 @@ namespace CS123 { namespace GL {
  */
 class SnowScene : public OpenGLScene {
 public:
-    SnowScene();
+    SnowScene(float size, int radius, int numTrees, int numSnowmen, float treeRadius, float snowmenRadius, float maxTreeHeight, float maxSnowmenHeight);
     virtual ~SnowScene();
 
     virtual void render(View *context) override;
-
+    virtual OpenGLSceneTile makeSceneTile(glm::vec3 coords, float size) override;
     // Use this method to set an internal selection, based on the (x, y) position of the mouse
     // pointer.  This will be used during the "modeler" lab, so don't worry about it for now.
     void setSelection(int x, int y);
 
-private:
+protected:
 
     void loadPhongShader();
     void setSceneUniforms(View *context);
     void setLights();
-    void updateCurrentTile(glm::vec4 eye);
-    void updateScene();
-    void renderScene();
-    void renderSceneTile(SnowSceneTile tile);
     void initLights();
+
     CS123SceneLightData makeLight(int i);
 
-    std::map<int, std::map<int, SnowSceneTile>> m_sceneMap;
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
-    int m_numTrees = 10;
-    int m_numSnowmen = 3;
-    int m_numLights = 10;
-    float m_treeRadius = 9.f;
-    float m_snowmanRadius = .3f;
-    float m_gridSize = 50.f;
-    glm::vec3 m_currentTile;
+    std::vector<CS123SceneLightData> m_lights;
+    int m_numLights;
+
+    int m_numTrees;
+    int m_numSnowmen;
+    float m_treeRadius;
+    float m_snowmanRadius;
+    float m_maxSnowmanHeight;
+    float m_maxTreeHeight;
 };
 
 #endif // SCENEVIEWSCENE_H

@@ -4,10 +4,7 @@ INPUT(
 ./release\glew.o
 ./release\view.o
 ./release\viewformat.o
-./release\orbitingcamera.o
-./release\snowscene.o
 ./release\openglscene.o
-./release\scene.o
 ./release\resourceloader.o
 ./release\Shader.o
 ./release\GLDebug.o
@@ -32,6 +29,14 @@ INPUT(
 ./release\sphere.o
 ./release\cylinder.o
 ./release\openglshape.o
+./release\camtranscamera.o
+./release\snowscene.o
+./release\snowscenetile.o
+./release\tree.o
+./release\utils.o
+./release\snowman.o
+./release\snow.o
+./release\snowsceneobject.o
 ./release\qrc_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_view.o

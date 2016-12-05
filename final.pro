@@ -27,7 +27,6 @@ SOURCES += ui/mainwindow.cpp \
     ui/view.cpp \
     ui/viewformat.cpp \
     scene/openglscene.cpp \
-    scene/scene.cpp \
     lib/resourceloader.cpp \
     gl/shaders/Shader.cpp \
     gl/GLDebug.cpp \
@@ -53,8 +52,13 @@ SOURCES += ui/mainwindow.cpp \
     shape/opengl/cylinder.cpp \
     shape/opengl/openglshape.cpp \
     camera/camtranscamera.cpp \
-    scene/snowscene.cpp \
-    scene/snowscenetile.cpp
+    scene/snowscene/snowscene.cpp \
+    scene/snowscene/snowscenetile.cpp \
+    scene/snowscene/tree.cpp \
+    scene/utils.cpp \
+    scene/snowscene/snowman.cpp \
+    scene/snowscene/snow.cpp \
+    scene/snowscene/snowsceneobject.cpp
 
 HEADERS += ui/mainwindow.h \
     ui_mainwindow.h \
@@ -63,7 +67,6 @@ HEADERS += ui/mainwindow.h \
     ui/viewformat.h \
     camera/camera.h \
     scene/openglscene.h \
-    scene/scene.h \
     lib/resourceloader.h \
     gl/shaders/Shader.h \
     gl/GLDebug.h \
@@ -91,8 +94,13 @@ HEADERS += ui/mainwindow.h \
     shape/opengl/openglshape.h \
     lib/cs123scenedata.h \
     camera/camtranscamera.h \
-    scene/snowscene.h \
-    scene/snowscenetile.h
+    scene/snowscene/snowscene.h \
+    scene/snowscene/snowscenetile.h \
+    scene/snowscene/tree.h \
+    scene/utils.h \
+    scene/snowscene/snowman.h \
+    scene/snowscene/snow.h \
+    scene/snowscene/snowsceneobject.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
@@ -103,8 +111,10 @@ DEFINES += TIXML_USE_STL
 DEFINES += GLM_SWIZZLE GLM_FORCE_RADIANS
 OTHER_FILES += shaders/shader.frag \
     shaders/shader.vert \
-    scene/Test.txt \
-    scene/testh.txt
+    shaders/quad/quad.vert \
+    shaders/quad/quad.frag \
+    shaders/shadow/shadow.vert \
+    shaders/shadow/shadow.frag
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -133,4 +143,8 @@ DISTFILES += \
     shaders/normals/normals.gsh \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
-    shaders/normals/normalsArrow.vert
+    shaders/normals/normalsArrow.vert \
+    shaders/quad/quad.frag \
+    shaders/quad/quad.vert \
+    shaders/shadow/shadow.frag \
+    shaders/shadow/shadow.vert

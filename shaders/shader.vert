@@ -5,13 +5,21 @@ layout(location = 1) in vec3 normal;   // Normal of the vertex
 layout(location = 4) in vec2 texCoord; // UV texture coordinates
 layout(location = 9) in float arrowOffset; // Sideways offset for billboarded normal arrows
 
-out vec3 color; // Computed color for this vertex
-out vec2 texc;
+out vec4 shadowCoord;
+out vec3 Normal_cameraspace;
+out vec3 LightDirection_cameraspace;
+out vec3 totalSpecular;
+out vec3 totalDiffuse;
+out vec3 totalAmbient;
+out vec3 Position_worldspace;
 
 // Transformation matrices
 uniform mat4 p;
 uniform mat4 v;
 uniform mat4 m;
+uniform vec3 LightInvDirection_worldspace;
+
+uniform mat4 depthBiasMVP;
 
 // Light data
 const int MAX_LIGHTS = 10;
@@ -32,8 +40,6 @@ uniform bool useArrowOffsets; // True if rendering the arrowhead of a normal for
 
 void main()
 {
-    texc = texCoord;
-
     vec4 position_cameraSpace = v * m * vec4(position, 1.0);
     vec4 normal_cameraSpace = vec4(normalize(mat3(transpose(inverse(v * m))) * normal), 0);
 
@@ -47,11 +53,17 @@ void main()
         position_cameraSpace += arrowOffset * vec4(offsetAxis, 0);
     }
 
-    gl_Position = p * position_cameraSpace;
+    gl_Position = p * v * m * vec4(position, 1.0);
+
+    // Same, but with the light's view matrix
+    shadowCoord = depthBiasMVP * m * vec4(position,1);
+
+    // Position of the vertex, in worldspace : M * position
+    Position_worldspace = (m * vec4(position,1)).xyz;
 
     if (useLighting)
     {
-        color = ambient_color.xyz; // Add ambient component
+        totalAmbient = ambient_color.xyz; // Add ambient component
 
         for (int i = 0; i < MAX_LIGHTS; i++) {
             vec4 vertexToLight = vec4(0);
@@ -65,18 +77,18 @@ void main()
 
             // Add diffuse component
             float diffuseIntensity = max(0.0, dot(vertexToLight, normal_cameraSpace));
-            color += max(vec3(0), lightColors[i] * diffuse_color * diffuseIntensity);
+            totalDiffuse += max(vec3(0), lightColors[i] * diffuse_color * diffuseIntensity);
 
             // Add specular component
             vec4 lightReflection = normalize(-reflect(vertexToLight, normal_cameraSpace));
             vec4 eyeDirection = normalize(vec4(0,0,0,1) - position_cameraSpace);
             float specIntensity = pow(max(0.0, dot(eyeDirection, lightReflection)), shininess);
-            color += max (vec3(0), lightColors[i] * specular_color * specIntensity);
+            totalSpecular += max (vec3(0), lightColors[i] * specular_color * specIntensity);
         }
     }
     else
     {
-        color = ambient_color + diffuse_color;
+        totalAmbient = ambient_color;
+        totalDiffuse = diffuse_color;
     }
-    color = clamp(color, 0.0, 1.0);
 }
