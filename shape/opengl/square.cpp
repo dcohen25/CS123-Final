@@ -1,6 +1,7 @@
 #include "square.h"
 
 #include <glm/glm.hpp>
+#include <iostream>
 
 // construct a square
 Square::Square(float size, int tess, glm::mat4x4 transform) :

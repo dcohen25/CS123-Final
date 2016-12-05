@@ -18,8 +18,8 @@
 using namespace CS123::GL;
 
 const float SnowSceneTile::tileSize = 10.f;
-const int SnowSceneTile::numTrees = 3;
-const int SnowSceneTile::numSnowmen = 3;
+const int SnowSceneTile::numTrees = 6;
+const int SnowSceneTile::numSnowmen = 6;
 
 SnowSceneTile::SnowSceneTile(glm::vec3 coords) :
     m_coords(coords)

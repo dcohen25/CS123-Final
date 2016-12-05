@@ -25,6 +25,7 @@ SnowScene::SnowScene() :
     loadPhongShader();
     loadQuadShader();
     loadShadowShader();
+    createRenderTarget();
     initLights();
 }
 
@@ -50,7 +51,7 @@ void SnowScene::loadShadowShader() {
     m_shadowShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 }
 
-bool SnowScene::createRenderTarget(View *context){
+bool SnowScene::createRenderTarget(){
     // The framebuffer, which regroups 0, 1, or more textures, and 0 or 1 depth buffer.
      m_FramebufferName = 0;
      glGenFramebuffers(1, &m_FramebufferName);
@@ -59,7 +60,7 @@ bool SnowScene::createRenderTarget(View *context){
      // Depth texture. Slower than a depth buffer, but you can sample it later in your shader
      glGenTextures(1, &m_depthTexture);
      glBindTexture(GL_TEXTURE_2D, m_depthTexture);
-     glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, context->width(), context->height(), 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+     glTexImage2D(GL_TEXTURE_2D, 0,GL_DEPTH_COMPONENT16, 1500, 1500, 0,GL_DEPTH_COMPONENT, GL_FLOAT, 0);
      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -80,7 +81,7 @@ void SnowScene::renderShadowPass(View *context){
     // Clear the screen
     // Render to our framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, m_FramebufferName);
-    glViewport(0,0,context->width(),context->height()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+    glViewport(0,0,1500,1500); // Render on the whole framebuffer, complete from the lower left corner to the upper right
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_shadowShader->bind();
     setShadowUniforms(context);
@@ -97,7 +98,7 @@ void SnowScene::renderPhongPass(View *context) {
     // Clear the screen
     // Render to our framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glViewport(0,0,context->width(),context->height()); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+    glViewport(0,0,1500,1500); // Render on the whole framebuffer, complete from the lower left corner to the upper right
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_phongShader->bind();
     setPhongUniforms(context);
@@ -110,7 +111,7 @@ void SnowScene::renderQuadPass(View *context) {
     // Clear the screen
     // Render to the screen
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glViewport(0,0,1024,1024); // Render on the whole framebuffer, complete from the lower left corner to the upper right
+    glViewport(0,0,1500,1500); // Render on the whole framebuffer, complete from the lower left corner to the upper right
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_quadShader->bind();
     setQuadUniforms(context);
@@ -133,7 +134,6 @@ void SnowScene::setQuadUniforms(View *context){
 
 void SnowScene::render(View *context) {
     setClearColor();
-    createRenderTarget(context);
     renderShadowPass(context);
     renderPhongPass(context);
 }

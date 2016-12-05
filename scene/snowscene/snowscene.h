@@ -56,7 +56,7 @@ protected:
     void renderShadowPass(View *context);
     void renderQuadPass(View *context);
     void setPhongUniforms(View *context);
-    bool createRenderTarget(View *context);
+    bool createRenderTarget();
     void updateCurrentTile(glm::vec4 eye);
     void setQuadUniforms(View *context);
     void setShadowUniforms(View *context);
