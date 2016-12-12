@@ -58,7 +58,8 @@ SOURCES += ui/mainwindow.cpp \
     scene/utils.cpp \
     scene/snowscene/snowman.cpp \
     scene/snowscene/snow.cpp \
-    scene/snowscene/snowsceneobject.cpp
+    scene/snowscene/snowsceneobject.cpp \
+    shape/opengl/terrain.cpp
 
 HEADERS += ui/mainwindow.h \
     ui_mainwindow.h \
@@ -100,7 +101,8 @@ HEADERS += ui/mainwindow.h \
     scene/utils.h \
     scene/snowscene/snowman.h \
     scene/snowscene/snow.h \
-    scene/snowscene/snowsceneobject.h
+    scene/snowscene/snowsceneobject.h \
+    shape/opengl/terrain.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include

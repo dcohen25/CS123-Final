@@ -80,7 +80,7 @@ protected:
     std::map<int, std::map<int, glm::mat4>> m_depthMVP;
     std::map<int, std::map<int, glm::mat4>> m_depthBiasMVP;
     std::map<int, std::map<int, glm::vec3>> m_lightInvDir;
-    std::map<int, std::map<int, SnowSceneTile>> m_sceneMap;
+    std::map<int, std::map<int, std::unique_ptr<SnowSceneTile>>> m_sceneMap;
     glm::vec3 m_currentTile;
     GLuint m_FramebufferName;
     GLuint m_depthTexture;

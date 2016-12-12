@@ -160,7 +160,7 @@ glm::vec3 SnowScene::createLightInvDir(glm::vec3 tile){
 }
 
 void SnowScene::addTileToMap(glm::vec3 tile){
-    m_sceneMap[tile.x][tile.z] = SnowSceneTile(tile);
+    m_sceneMap[tile.x][tile.z] = std::make_unique<SnowSceneTile>(tile);
 }
 
 void SnowScene::addDepthMVP(glm::vec3 tile){
@@ -265,7 +265,7 @@ void SnowScene::renderScene(std::unique_ptr<CS123::GL::CS123Shader> &shader){
         for (int j = -SnowScene::sceneRadius; j <= SnowScene::sceneRadius; j++){
             int x = m_currentTile.x + (j * SnowSceneTile::tileSize);
             int z = m_currentTile.z + (i * SnowSceneTile::tileSize);
-            m_sceneMap[x][z].render(shader, m_shapes);
+            m_sceneMap[x][z]->render(shader, m_shapes);
         }
     }
 }

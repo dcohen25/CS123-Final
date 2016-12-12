@@ -8,11 +8,16 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
 
+#include "shape/opengl/terrain.h"
+
 class SnowSceneTile
 {
 public:
     SnowSceneTile(glm::vec3 coords);
     SnowSceneTile();
+    SnowSceneTile(SnowSceneTile &other);
+    SnowSceneTile(const SnowSceneTile&) = delete;
+    SnowSceneTile& operator=(SnowSceneTile& other);
     ~SnowSceneTile();
 
     virtual void render(std::unique_ptr<CS123Shader> &shader,  std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
@@ -33,6 +38,7 @@ protected:
 
     glm::vec3 m_coords;
     std::vector<SnowSceneObject> m_sceneObjects;
+    std::unique_ptr<Terrain> m_terrain;
 };
 
 #endif // SNOWSCENETILE_H

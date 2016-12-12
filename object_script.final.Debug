@@ -37,6 +37,7 @@ INPUT(
 ./debug\snowman.o
 ./debug\snow.o
 ./debug\snowsceneobject.o
+./debug\terrain.o
 ./debug\qrc_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_view.o

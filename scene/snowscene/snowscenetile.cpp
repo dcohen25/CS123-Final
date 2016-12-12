@@ -22,13 +22,31 @@ const int SnowSceneTile::numTrees = 6;
 const int SnowSceneTile::numSnowmen = 6;
 
 SnowSceneTile::SnowSceneTile(glm::vec3 coords) :
-    m_coords(coords)
+    m_coords(coords),
+    m_terrain(nullptr)
 {
     initScene();
 }
 
 SnowSceneTile::SnowSceneTile(){
 
+}
+
+SnowSceneTile::SnowSceneTile(SnowSceneTile &other) :
+    m_terrain(nullptr)
+{
+    m_coords = other.m_coords;
+    m_terrain.swap(other.m_terrain);
+    m_sceneObjects = other.m_sceneObjects;
+}
+
+SnowSceneTile& SnowSceneTile::operator=(SnowSceneTile& other)
+{
+    assert(this != &other); // self-assignment check not required
+    this->m_coords = other.m_coords;
+    this->m_terrain.swap(other.m_terrain);
+    this->m_sceneObjects = other.m_sceneObjects;
+    return *this;
 }
 
 SnowSceneTile::~SnowSceneTile()
@@ -43,8 +61,9 @@ void SnowSceneTile::initScene(){
 }
 
 void SnowSceneTile::initSnow(){
-    Snow snow = Snow(m_coords);
-    m_sceneObjects.push_back(snow);
+//    Snow snow = Snow(m_coords);
+//    m_sceneObjects.push_back(snow);
+    m_terrain = std::make_unique<Terrain>(tileSize);
 }
 
 void SnowSceneTile::initTrees(){
@@ -76,6 +95,8 @@ void SnowSceneTile::render(std::unique_ptr<CS123Shader> &shader, std::map<Primit
     for (int i = 0; i < m_sceneObjects.size(); i++){
         m_sceneObjects[i].render(shader, shapes);
     }
+    // TODO: render terrain
+    m_terrain->draw();
 }
 
 glm::vec3 SnowSceneTile::getRandomPositionOnTile(){
