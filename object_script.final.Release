@@ -37,6 +37,12 @@ INPUT(
 ./release\snowman.o
 ./release\snow.o
 ./release\snowsceneobject.o
+./release\boundingbox.o
+./release\image_DXT.o
+./release\image_helper.o
+./release\SOIL.o
+./release\stb_image_aug.o
+./release\test_SOIL.o
 ./release\qrc_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_view.o

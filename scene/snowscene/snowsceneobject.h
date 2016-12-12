@@ -10,6 +10,7 @@
 #include "shape/opengl/sphere.h"
 #include "shape/opengl/cylinder.h"
 #include "map"
+#include "scene/boundingbox.h"
 
 class SnowSceneObject
 {
@@ -18,6 +19,9 @@ public:
     ~SnowSceneObject();
 
     virtual void render(std::unique_ptr<CS123Shader>  &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
+    BoundingBox getBoundingBox();
+
+    glm::vec3 getCoords();
 
 protected:
     std::vector<CS123ScenePrimitive> m_primitives;
@@ -27,6 +31,8 @@ protected:
     float m_length;
     float m_width;
     float m_height;
+
+    BoundingBox m_boundingBox;
 };
 
 

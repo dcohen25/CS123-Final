@@ -51,6 +51,9 @@ private:
     glm::vec4      m_cameraEye;
     bool           m_isDragging;
 
+    float m_lastTime;
+    int m_nbFrames;
+
 private slots:
     void tick();
 };

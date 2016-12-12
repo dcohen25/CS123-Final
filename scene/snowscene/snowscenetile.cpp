@@ -17,12 +17,13 @@
 
 using namespace CS123::GL;
 
-const float SnowSceneTile::tileSize = 10.f;
-const int SnowSceneTile::numTrees = 6;
-const int SnowSceneTile::numSnowmen = 6;
+const float SnowSceneTile::tileSize = 50.f;
+const int SnowSceneTile::numTrees = 40;
+const int SnowSceneTile::numSnowmen = 4;
 
 SnowSceneTile::SnowSceneTile(glm::vec3 coords) :
-    m_coords(coords)
+    m_coords(coords),
+    m_boundingBox(coords, SnowSceneTile::tileSize, SnowSceneTile::tileSize, SnowSceneTile::tileSize)
 {
     initScene();
 }
@@ -72,9 +73,11 @@ void SnowSceneTile::initSnowmen(){
     }
 }
 
-void SnowSceneTile::render(std::unique_ptr<CS123Shader> &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+void SnowSceneTile::render(View *context, std::unique_ptr<CS123Shader> &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     for (int i = 0; i < m_sceneObjects.size(); i++){
-        m_sceneObjects[i].render(shader, shapes);
+        if (context->getCamera()->isVisible(m_sceneObjects[i].getBoundingBox())){
+            m_sceneObjects[i].render(shader, shapes);
+        }
     }
 }
 
@@ -84,4 +87,8 @@ glm::vec3 SnowSceneTile::getRandomPositionOnTile(){
     pos.y = 0.f;
     pos.z = (Utils::getRandomValue() * SnowSceneTile::tileSize)  - (SnowSceneTile::tileSize / 2.f) + m_coords.z;
     return pos;
+}
+
+BoundingBox SnowSceneTile::getBoundingBox(){
+    return m_boundingBox;
 }

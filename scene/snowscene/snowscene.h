@@ -48,18 +48,21 @@ protected:
     void loadPhongShader();
     void loadQuadShader();
     void loadShadowShader();
+    void loadSkyboxShader();
     void setLights();
     void initLights();
     void updateSceneMap();
-    void renderScene(std::unique_ptr<CS123::GL::CS123Shader> &shader);
+    void renderScene(View *context, std::unique_ptr<CS123::GL::CS123Shader> &shader);
     void renderPhongPass(View *context);
     void renderShadowPass(View *context);
+    void renderSkyboxPass(View *context);
     void renderQuadPass(View *context);
     void setPhongUniforms(View *context);
     bool createRenderTarget();
     void updateCurrentTile(glm::vec4 eye);
     void setQuadUniforms(View *context);
     void setShadowUniforms(View *context);
+    void setSkyboxUniforms(View *context);
     bool isNewTile(glm::vec3 tile);
     void addDepthMVP(glm::vec3 tile);
     void addDepthBiasMVP(glm::vec3 tile);
@@ -71,11 +74,18 @@ protected:
     void addTileToMap(glm::vec3 tile);
     void renderQuad();
 
+    void loadSkybox();
+    void loadSkyboxVertices();
+    void loadSkyboxVAO();
+    GLuint loadCubemap(std::vector<const GLchar*> faces);
+
+
     CS123SceneLightData makeLight(int i);
 
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
     std::unique_ptr<CS123::GL::CS123Shader> m_quadShader;
     std::unique_ptr<CS123::GL::CS123Shader> m_shadowShader;
+    std::unique_ptr<CS123::GL::CS123Shader> m_skyboxShader;
     std::vector<CS123SceneLightData> m_lights;
     std::map<int, std::map<int, glm::mat4>> m_depthMVP;
     std::map<int, std::map<int, glm::mat4>> m_depthBiasMVP;
@@ -84,6 +94,10 @@ protected:
     glm::vec3 m_currentTile;
     GLuint m_FramebufferName;
     GLuint m_depthTexture;
+    GLuint m_skyboxTexture;
+    GLuint m_skyboxVAO, m_skyboxVBO;
+    GLuint m_cubemapTexture;
+
 };
 
 #endif // SCENEVIEWSCENE_H

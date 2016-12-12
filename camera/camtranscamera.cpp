@@ -24,9 +24,45 @@ CamtransCamera::CamtransCamera()
     m_v = (up - (glm::dot(up, m_w) * m_w)) / glm::length((up - (glm::dot(up, m_w) * m_w)));
     m_u = glm::vec4(glm::cross(glm::vec3(m_v), glm::vec3(m_w)), 0);
 
+    updateCamera();
+}
+
+CamtransCamera::~CamtransCamera(){
+
+}
+
+void CamtransCamera::updateCamera(){
     updateView();
     updateProjection();
+    updateFrustum();
 }
+
+void CamtransCamera::updateFrustum(){
+    updateFrustumMatrix();
+    updateFrustumRVectors();
+    updateFrustumPlanes();
+}
+
+void CamtransCamera::updateFrustumMatrix(){
+    m_frustumMatrix = m_projection * m_view;
+}
+
+void CamtransCamera::updateFrustumRVectors(){
+    m_frustumR0 = glm::vec4(m_frustumMatrix[0][0], m_frustumMatrix[1][0], m_frustumMatrix[2][0], m_frustumMatrix[3][0]);
+    m_frustumR1 = glm::vec4(m_frustumMatrix[0][1], m_frustumMatrix[1][1], m_frustumMatrix[2][1], m_frustumMatrix[3][1]);
+    m_frustumR2 = glm::vec4(m_frustumMatrix[0][2], m_frustumMatrix[1][2], m_frustumMatrix[2][2], m_frustumMatrix[3][2]);
+    m_frustumR3 = glm::vec4(m_frustumMatrix[0][3], m_frustumMatrix[1][3], m_frustumMatrix[2][3], m_frustumMatrix[3][3]);
+}
+
+void CamtransCamera::updateFrustumPlanes(){
+    m_frustumLeftPlane = m_frustumR3 - m_frustumR0;
+    m_frustumBottomPlane = m_frustumR3 - m_frustumR1;
+    m_frustumBackPlane = m_frustumR3 - m_frustumR2;
+    m_frustumRightPlane = m_frustumR3 + m_frustumR0;
+    m_frustumTopPlane = m_frustumR3 + m_frustumR1;
+    m_frustumFrontPlane = m_frustumR3 + m_frustumR2;
+}
+
 glm::vec4 CamtransCamera::getEye(){
     return m_eye;
 }
@@ -38,6 +74,32 @@ void CamtransCamera::setAspectRatio(float a)
 
 }
 
+bool CamtransCamera::isVisible(BoundingBox b){
+    return !isBoxBehindPlane(m_frustumBackPlane, b) &&
+            !isBoxBehindPlane(m_frustumFrontPlane, b) &&
+            !isBoxBehindPlane(m_frustumBottomPlane, b) &&
+            !isBoxBehindPlane(m_frustumTopPlane, b) &&
+            !isBoxBehindPlane(m_frustumLeftPlane, b) &&
+            !isBoxBehindPlane(m_frustumRightPlane, b);
+}
+
+bool CamtransCamera::isBoxBehindPlane(glm::vec4 plane, BoundingBox b){
+    return isPointBehindPlane(plane, b.getBottomFaceBottomLeft()) &&
+            isPointBehindPlane(plane, b.getBottomFaceBottomRight()) &&
+            isPointBehindPlane(plane, b.getBottomFaceTopLeft()) &&
+            isPointBehindPlane(plane, b.getTopFaceBottomLeft()) &&
+            isPointBehindPlane(plane, b.getTopFaceBottomRight()) &&
+            isPointBehindPlane(plane, b.getTopFaceTopLeft()) &&
+            isPointBehindPlane(plane, b.getTopFaceTopRight());
+}
+
+bool CamtransCamera::isPointBehindPlane(glm::vec4 plane, glm::vec3 point){
+    return plane.x * point.x +
+            plane.y * point.y +
+            plane.z * point.z +
+            plane.w < 0;
+}
+
 void CamtransCamera::mouseDragged(int x, int y) {
     rotateV(.5 * x);
 }
@@ -45,37 +107,25 @@ void CamtransCamera::mouseDragged(int x, int y) {
 void CamtransCamera::keyDown(){
     m_eye = m_eye + (m_w * .1f);
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 
 void CamtransCamera::keyUp(){
     m_eye = m_eye + (-m_w * .1f);
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 
 void CamtransCamera::keyLeft(){
     m_eye = m_eye + (-m_u * .1f);
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 
 void CamtransCamera::keyRight(){
     m_eye = m_eye + (m_u * .1f);
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 void CamtransCamera::updateView(){
     glm::mat4x4 rotate(m_u[0], m_u[1], m_u[2], 0, m_v[0], m_v[1], m_v[2], 0, m_w[0], m_w[1], m_w[2], 0, 0, 0, 0, 1);
@@ -162,10 +212,7 @@ void CamtransCamera::setHeightAngle(float h) {
     // @TODO: [CAMTRANS] Fill this in...
     m_heightAngle = h * (M_PI / 180.f);
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 
 void CamtransCamera::translate(const glm::vec4 &v) {
@@ -184,11 +231,7 @@ void CamtransCamera::rotateU(float degrees) {
     m_v = (w0 * sinf(radians)) + (v0 * cosf(radians));
     m_w = (w0 * cosf(radians)) - (v0 * sinf(radians));
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
-
+    updateCamera();
 }
 
 void CamtransCamera::rotateV(float degrees) {
@@ -203,11 +246,7 @@ void CamtransCamera::rotateV(float degrees) {
     m_v = v0;
     m_w = (u0 * sinf(radians)) + (w0 * cosf(radians));
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
-
+    updateCamera();
 }
 
 void CamtransCamera::rotateW(float degrees) {
@@ -222,10 +261,7 @@ void CamtransCamera::rotateW(float degrees) {
     m_v = (u0 * sinf(-radians)) + (v0 * cosf(-radians));
     m_w = w0;
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
+    updateCamera();
 }
 
 void CamtransCamera::setClip(float nearPlane, float farPlane) {
@@ -233,9 +269,5 @@ void CamtransCamera::setClip(float nearPlane, float farPlane) {
     m_nearPlane = nearPlane;
     m_farPlane = farPlane;
 
-    // update view
-    updateView();
-    // update projection
-    updateProjection();
-
+    updateCamera();
 }

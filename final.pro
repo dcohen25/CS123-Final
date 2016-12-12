@@ -58,7 +58,13 @@ SOURCES += ui/mainwindow.cpp \
     scene/utils.cpp \
     scene/snowscene/snowman.cpp \
     scene/snowscene/snow.cpp \
-    scene/snowscene/snowsceneobject.cpp
+    scene/snowscene/snowsceneobject.cpp \
+    scene/boundingbox.cpp \
+    soil/image_DXT.c \
+    soil/image_helper.c \
+    soil/SOIL.c \
+    soil/stb_image_aug.c \
+    soil/test_SOIL.cpp
 
 HEADERS += ui/mainwindow.h \
     ui_mainwindow.h \
@@ -100,7 +106,14 @@ HEADERS += ui/mainwindow.h \
     scene/utils.h \
     scene/snowscene/snowman.h \
     scene/snowscene/snow.h \
-    scene/snowscene/snowsceneobject.h
+    scene/snowscene/snowsceneobject.h \
+    scene/boundingbox.h \
+    soil/image_DXT.h \
+    soil/image_helper.h \
+    soil/SOIL.h \
+    soil/stb_image_aug.h \
+    soil/stbi_DDS_aug.h \
+    soil/stbi_DDS_aug_c.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
@@ -114,7 +127,13 @@ OTHER_FILES += shaders/shader.frag \
     shaders/quad/quad.vert \
     shaders/quad/quad.frag \
     shaders/shadow/shadow.vert \
-    shaders/shadow/shadow.frag
+    shaders/shadow/shadow.frag \
+    skybox/front.png \
+    skybox/back.png \
+    skybox/left.png \
+    skybox/right.png \
+    skybox/top.png \
+    skybox/bottom.png
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -147,4 +166,6 @@ DISTFILES += \
     shaders/quad/quad.frag \
     shaders/quad/quad.vert \
     shaders/shadow/shadow.frag \
-    shaders/shadow/shadow.vert
+    shaders/shadow/shadow.vert \
+    shaders/skybox/skybox.frag \
+    shaders/skybox/skybox.vert

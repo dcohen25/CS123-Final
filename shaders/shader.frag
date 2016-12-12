@@ -47,7 +47,7 @@ void main(){
     float visibility = 1.0;
 
     // Sample the shadow map 4 times
-    for (int i=0;i<20;i++){
+    for (int i=0;i<4;i++){
             // use either :
             //  - Always the same samples.
             //    Gives a fixed pattern in the shadow, but no noise
@@ -61,7 +61,7 @@ void main(){
 
             // being fully in the shadow will eat up 4*0.2 = 0.8
             // 0.2 potentially remain, which is quite dark.
-            visibility -= .05*(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
+            visibility -= .225*(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
     }
     fragColor = totalAmbient + (visibility * totalDiffuse) + (visibility * totalSpecular);
 }

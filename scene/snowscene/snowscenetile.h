@@ -7,6 +7,9 @@
 #include "snowsceneobject.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
+#include "scene/boundingbox.h"
+
+class View;
 
 class SnowSceneTile
 {
@@ -15,11 +18,13 @@ public:
     SnowSceneTile();
     ~SnowSceneTile();
 
-    virtual void render(std::unique_ptr<CS123Shader> &shader,  std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
+    virtual void render(View *context, std::unique_ptr<CS123Shader> &shader,  std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
 
     const static float tileSize;
     const static int numTrees;
     const static int numSnowmen;
+
+    BoundingBox getBoundingBox();
 
 protected:
     // initialize scene
@@ -33,6 +38,7 @@ protected:
 
     glm::vec3 m_coords;
     std::vector<SnowSceneObject> m_sceneObjects;
+    BoundingBox m_boundingBox;
 };
 
 #endif // SNOWSCENETILE_H

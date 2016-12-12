@@ -22,6 +22,8 @@ View::View(QWidget *parent) : QGLWidget(ViewFormat(), parent),
 
     // The update loop is implemented using a timer
     connect(&m_timer, SIGNAL(timeout()), this, SLOT(tick()));
+    m_lastTime = 0;
+    m_nbFrames = 0;
 }
 
 View::~View()

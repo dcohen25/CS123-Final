@@ -22,7 +22,7 @@ class OpenGLShape {
 
 public:
     OpenGLShape();
-    ~OpenGLShape();
+    virtual ~OpenGLShape();
 
     /** Draw the initialized geometry. */
     virtual void draw();

@@ -2,6 +2,7 @@
 #define CAMERA_H
 
 #include <glm.hpp>
+#include "scene/boundingbox.h"
 
 /**
  * @class Camera
@@ -34,6 +35,8 @@ public:
     //
 
     virtual glm::vec4 getEye(){};
+
+    virtual bool isVisible(BoundingBox b){};
 
     // Called when the mouse button is pressed down.
     virtual void mouseDown(int x, int y)    {}

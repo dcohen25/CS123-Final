@@ -2,7 +2,7 @@
 #define CAMTRANSCAMERA_H
 
 #include "camera.h"
-
+#include "scene/boundingbox.h"
 
 /**
  * @class CamtransCamera
@@ -13,7 +13,9 @@ class CamtransCamera : public Camera {
 public:
     // Initialize your camera.
     CamtransCamera();
+    ~CamtransCamera();
 
+    virtual bool isVisible(BoundingBox b) override;
     // Sets the aspect ratio of this camera. Automatically called by the GUI when the window is
     // resized.
     virtual void setAspectRatio(float aspectRatio);
@@ -91,6 +93,7 @@ private:
     glm::mat4x4 m_view;
     glm::mat4x4 m_scale;
     glm::mat4x4 m_perspective;
+    glm::mat4x4 m_frustumMatrix;
     float m_aspectRatio;
     float m_heightAngle;
     float m_nearPlane;
@@ -101,9 +104,28 @@ private:
     glm::vec4 m_eye;
     float m_angleX, m_angleY, m_zoomZ;
 
+    glm::vec4 m_frustumR0;
+    glm::vec4 m_frustumR1;
+    glm::vec4 m_frustumR2;
+    glm::vec4 m_frustumR3;
+
+    glm::vec4 m_frustumLeftPlane;
+    glm::vec4 m_frustumRightPlane;
+    glm::vec4 m_frustumBottomPlane;
+    glm::vec4 m_frustumTopPlane;
+    glm::vec4 m_frustumFrontPlane;
+    glm::vec4 m_frustumBackPlane;
+
     void updateCamera();
     void updateProjection();
     void updateView();
+    void updateFrustum();
+    void updateFrustumMatrix();
+    void updateFrustumRVectors();
+    void updateFrustumPlanes();
+
+    bool isBoxBehindPlane(glm::vec4 plane, BoundingBox b);
+    bool isPointBehindPlane(glm::vec4 plane, glm::vec3 point);
 
 };
 

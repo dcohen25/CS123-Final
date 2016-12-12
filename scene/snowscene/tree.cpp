@@ -44,8 +44,8 @@ void Tree::initTreeTopPrimitive(){
     CS123ScenePrimitive tree;
     tree.type = PrimitiveType::PRIMITIVE_CONE;
     tree.material.clear();
-    tree.material.cAmbient.g = .3f;
-    tree.material.cDiffuse.g = 1.f;
+    tree.material.cAmbient.g = .2f;
+    tree.material.cDiffuse.g = .5f;
     tree.material.cSpecular.r = tree.material.cSpecular.g = tree.material.cSpecular.b = 1;
     tree.material.shininess = 64;
 

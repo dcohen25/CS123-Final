@@ -80,7 +80,13 @@ SOURCES       = ui\mainwindow.cpp \
 		scene\utils.cpp \
 		scene\snowscene\snowman.cpp \
 		scene\snowscene\snow.cpp \
-		scene\snowscene\snowsceneobject.cpp debug\qrc_resources.cpp \
+		scene\snowscene\snowsceneobject.cpp \
+		scene\boundingbox.cpp \
+		soil\image_DXT.c \
+		soil\image_helper.c \
+		soil\SOIL.c \
+		soil\stb_image_aug.c \
+		soil\test_SOIL.cpp debug\qrc_resources.cpp \
 		debug\moc_mainwindow.cpp \
 		debug\moc_view.cpp
 OBJECTS       = debug/mainwindow.o \
@@ -121,6 +127,12 @@ OBJECTS       = debug/mainwindow.o \
 		debug/snowman.o \
 		debug/snow.o \
 		debug/snowsceneobject.o \
+		debug/boundingbox.o \
+		debug/image_DXT.o \
+		debug/image_helper.o \
+		debug/SOIL.o \
+		debug/stb_image_aug.o \
+		debug/test_SOIL.o \
 		debug/qrc_resources.o \
 		debug/moc_mainwindow.o \
 		debug/moc_view.o
@@ -134,7 +146,9 @@ DIST          = shaders/normals/normals.vert \
 		shaders/quad/quad.frag \
 		shaders/quad/quad.vert \
 		shaders/shadow/shadow.frag \
-		shaders/shadow/shadow.vert ui\mainwindow.h \
+		shaders/shadow/shadow.vert \
+		shaders/skybox/skybox.frag \
+		shaders/skybox/skybox.vert ui\mainwindow.h \
 		ui_mainwindow.h \
 		glew-1.10.0\include\GL\glew.h \
 		ui\view.h \
@@ -174,7 +188,14 @@ DIST          = shaders/normals/normals.vert \
 		scene\utils.h \
 		scene\snowscene\snowman.h \
 		scene\snowscene\snow.h \
-		scene\snowscene\snowsceneobject.h ui\mainwindow.cpp \
+		scene\snowscene\snowsceneobject.h \
+		scene\boundingbox.h \
+		soil\image_DXT.h \
+		soil\image_helper.h \
+		soil\SOIL.h \
+		soil\stb_image_aug.h \
+		soil\stbi_DDS_aug.h \
+		soil\stbi_DDS_aug_c.h ui\mainwindow.cpp \
 		main.cpp \
 		glew-1.10.0\src\glew.c \
 		ui\view.cpp \
@@ -211,7 +232,13 @@ DIST          = shaders/normals/normals.vert \
 		scene\utils.cpp \
 		scene\snowscene\snowman.cpp \
 		scene\snowscene\snow.cpp \
-		scene\snowscene\snowsceneobject.cpp
+		scene\snowscene\snowsceneobject.cpp \
+		scene\boundingbox.cpp \
+		soil\image_DXT.c \
+		soil\image_helper.c \
+		soil\SOIL.c \
+		soil\stb_image_aug.c \
+		soil\test_SOIL.cpp
 QMAKE_TARGET  = final
 DESTDIR        = debug\ #avoid trailing-slash linebreak
 TARGET         = final.exe
@@ -250,7 +277,7 @@ dist:
 	$(ZIP) final.zip $(SOURCES) $(DIST) final.pro C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\spec_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\qdevice.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\device_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\qconfig.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquickrenderer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquickrenderer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3drenderer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3drenderer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_core.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_declarative.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_declarative_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_enginio.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_enginio_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_help.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_location.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_network.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_script.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkit.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkit_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkitwidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt_functions.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\qt_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\win32-g++\qmake.conf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\spec_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exclusive_builds.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\default_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\default_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\resolve_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\default_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\build_pass.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\c++11.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\c++14.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\rtti.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\precompile_header.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\warn_on.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\resources.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\moc.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\opengl.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\uic.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\windows.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\testcase_targets.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exceptions.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\yacc.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\lex.prf final.pro resources.qrc C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/qtmaind.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5OpenGLd.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Widgetsd.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Guid.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Xmld.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Cored.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\mainwindow.o debug\main.o debug\glew.o debug\view.o debug\viewformat.o debug\openglscene.o debug\resourceloader.o debug\Shader.o debug\GLDebug.o debug\Texture.o debug\FBO.o debug\VBO.o debug\VAO.o debug\VBOAttribMarker.o debug\CS123Shader.o debug\IBO.o debug\Texture2D.o debug\TextureParameters.o debug\TextureParametersBuilder.o debug\FullScreenQuad.o debug\GBufferShader.o debug\RenderBuffer.o debug\DepthBuffer.o debug\circle.o debug\square.o debug\cone.o debug\cube.o debug\sphere.o debug\cylinder.o debug\openglshape.o debug\camtranscamera.o debug\snowscene.o debug\snowscenetile.o debug\tree.o debug\utils.o debug\snowman.o debug\snow.o debug\snowsceneobject.o debug\qrc_resources.o debug\moc_mainwindow.o debug\moc_view.o
+	-$(DEL_FILE) debug\mainwindow.o debug\main.o debug\glew.o debug\view.o debug\viewformat.o debug\openglscene.o debug\resourceloader.o debug\Shader.o debug\GLDebug.o debug\Texture.o debug\FBO.o debug\VBO.o debug\VAO.o debug\VBOAttribMarker.o debug\CS123Shader.o debug\IBO.o debug\Texture2D.o debug\TextureParameters.o debug\TextureParametersBuilder.o debug\FullScreenQuad.o debug\GBufferShader.o debug\RenderBuffer.o debug\DepthBuffer.o debug\circle.o debug\square.o debug\cone.o debug\cube.o debug\sphere.o debug\cylinder.o debug\openglshape.o debug\camtranscamera.o debug\snowscene.o debug\snowscenetile.o debug\tree.o debug\utils.o debug\snowman.o debug\snow.o debug\snowsceneobject.o debug\boundingbox.o debug\image_DXT.o debug\image_helper.o debug\SOIL.o debug\stb_image_aug.o debug\test_SOIL.o debug\qrc_resources.o debug\moc_mainwindow.o debug\moc_view.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -271,9 +298,11 @@ debug/qrc_resources.cpp: resources.qrc \
 		shaders/quad/quad.frag \
 		shaders/shadow/shadow.vert \
 		shaders/shader.frag \
+		shaders/skybox/skybox.vert \
 		shaders/quad/quad.vert \
 		shaders/shadow/shadow.frag \
-		shaders/shader.vert
+		shaders/shader.vert \
+		shaders/skybox/skybox.frag
 	C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\rcc.exe -name resources resources.qrc -o debug\qrc_resources.cpp
 
 compiler_moc_header_make_all: debug/moc_mainwindow.cpp debug/moc_view.cpp
@@ -590,6 +619,7 @@ debug/moc_view.cpp: glew-1.10.0/include/GL/glew.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		scene/boundingbox.h \
 		scene/openglscene.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
@@ -824,6 +854,7 @@ ui_mainwindow.h: ui/mainwindow.ui \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		scene/boundingbox.h \
 		scene/openglscene.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
@@ -1105,6 +1136,7 @@ debug/mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		scene/boundingbox.h \
 		scene/openglscene.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
@@ -1453,6 +1485,7 @@ debug/view.o: ui/view.cpp ui/view.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		scene/boundingbox.h \
 		scene/openglscene.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
@@ -2787,7 +2820,8 @@ debug/camtranscamera.o: camera/camtranscamera.cpp camera/camtranscamera.h \
 		glm/vector_relational.hpp \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
-		glm/detail/func_integer.inl
+		glm/detail/func_integer.inl \
+		scene/boundingbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\camtranscamera.o camera\camtranscamera.cpp
 
 debug/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
@@ -2884,6 +2918,7 @@ debug/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
+		scene/boundingbox.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3029,7 +3064,8 @@ debug/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
 		glm/gtx/norm.inl \
 		glm/gtx/string_cast.inl \
 		gl/util/FullScreenQuad.h \
-		gl/datatype/VAO.h
+		gl/datatype/VAO.h \
+		soil/SOIL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\snowscene.o scene\snowscene\snowscene.cpp
 
 debug/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snowscenetile.h \
@@ -3124,6 +3160,7 @@ debug/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snowsce
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
+		scene/boundingbox.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3368,6 +3405,7 @@ debug/tree.o: scene/snowscene/tree.cpp scene/snowscene/tree.h \
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
+		scene/boundingbox.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3545,6 +3583,7 @@ debug/snowman.o: scene/snowscene/snowman.cpp scene/snowscene/snowman.h \
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
+		scene/boundingbox.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3647,10 +3686,12 @@ debug/snow.o: scene/snowscene/snow.cpp scene/snowscene/snow.h \
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
+		scene/boundingbox.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl
+		glm/gtx/transform.inl \
+		scene/snowscene/snowscenetile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\snow.o scene\snowscene\snow.cpp
 
 debug/snowsceneobject.o: scene/snowscene/snowsceneobject.cpp scene/snowscene/snowsceneobject.h \
@@ -3743,8 +3784,108 @@ debug/snowsceneobject.o: scene/snowscene/snowsceneobject.cpp scene/snowscene/sno
 		shape/opengl/cone.h \
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
-		shape/opengl/cylinder.h
+		shape/opengl/cylinder.h \
+		scene/boundingbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\snowsceneobject.o scene\snowscene\snowsceneobject.cpp
+
+debug/boundingbox.o: scene/boundingbox.cpp scene/boundingbox.h \
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\boundingbox.o scene\boundingbox.cpp
+
+debug/image_DXT.o: soil/image_DXT.c soil/image_DXT.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\image_DXT.o soil\image_DXT.c
+
+debug/image_helper.o: soil/image_helper.c soil/image_helper.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\image_helper.o soil\image_helper.c
+
+debug/SOIL.o: soil/SOIL.c soil/SOIL.h \
+		soil/stb_image_aug.h \
+		soil/image_helper.h \
+		soil/image_DXT.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\SOIL.o soil\SOIL.c
+
+debug/stb_image_aug.o: soil/stb_image_aug.c soil/stb_image_aug.h \
+		soil/stbi_DDS_aug.h \
+		soil/stbi_DDS_aug_c.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\stb_image_aug.o soil\stb_image_aug.c
+
+debug/test_SOIL.o: soil/test_SOIL.cpp soil/SOIL.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\test_SOIL.o soil\test_SOIL.cpp
 
 debug/qrc_resources.o: debug/qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\qrc_resources.o debug\qrc_resources.cpp

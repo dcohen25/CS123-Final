@@ -37,6 +37,12 @@ INPUT(
 ./debug\snowman.o
 ./debug\snow.o
 ./debug\snowsceneobject.o
+./debug\boundingbox.o
+./debug\image_DXT.o
+./debug\image_helper.o
+./debug\SOIL.o
+./debug\stb_image_aug.o
+./debug\test_SOIL.o
 ./debug\qrc_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_view.o

@@ -6,5 +6,7 @@
         <file alias="quad.vert">shaders/quad/quad.vert</file>
         <file alias="shadow.frag">shaders/shadow/shadow.frag</file>
         <file alias="shadow.vert">shaders/shadow/shadow.vert</file>
+        <file alias="skybox.frag">shaders/skybox/skybox.frag</file>
+        <file alias="skybox.vert">shaders/skybox/skybox.vert</file>
     </qresource>
 </RCC>

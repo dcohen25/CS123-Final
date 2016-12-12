@@ -29,8 +29,8 @@ void Snow::initSnowPrimitive(){
     snow.material.cDiffuse.r = 1.f;
     snow.material.cDiffuse.g = 1.f;
     snow.material.cDiffuse.b = 1.f;
-    snow.material.cSpecular.r = snow.material.cSpecular.g = snow.material.cSpecular.b = 1;
-    snow.material.shininess = 100;
+    snow.material.cSpecular.r = snow.material.cSpecular.g = snow.material.cSpecular.b = 0;
+    snow.material.shininess = 0;
 
     m_primitives.push_back(snow);
 }
