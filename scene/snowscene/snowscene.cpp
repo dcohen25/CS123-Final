@@ -20,13 +20,11 @@ using namespace CS123::GL;
 const int SnowScene::sceneRadius = 1;
 const int SnowScene::numLights = 1;
 
-SnowScene::SnowScene() :
-    m_currentTile(0, 0, 0)
+SnowScene::SnowScene()
 {
     loadSkyboxShader();
     loadSkybox();
     loadPhongShader();
-//    loadQuadShader();
     loadShadowShader();
     createRenderTarget();
     initLights();
@@ -172,8 +170,9 @@ void SnowScene::renderShadowPass(View *context){
 void SnowScene::setShadowUniforms(View *context){
     // Send our transformation to the currently bound shader,
     // in the "MVP" uniform
-    m_shadowShader->setUniform("depthMVP", m_depthMVP[m_currentTile.x][m_currentTile.z]);
+    m_shadowShader->setUniform("depthMVP", m_depthMVP);
 }
+
 void SnowScene::renderPhongPass(View *context) {
     // Clear the screen
     // Render to our framebuffer
@@ -219,67 +218,58 @@ void SnowScene::render(View *context) {
 }
 
 void SnowScene::updateScene(View *context){
-    updateCurrentTile(context->getCamera()->getEye());
-   // updateSceneMap();
+    updateCurrentTile(context);
+    updateDepthMVP(context);
+    updateSceneMap();
+    updateTilesToRender(context);
 }
 
-void SnowScene::addTile(glm::vec3 tile){
-    addTileToMap(tile);
-    addLightInvDir(tile);
-    addDepthMVP(tile);
-    addDepthBiasMVP(tile);
+void SnowScene::updateTilesToRender(View *context){
+    m_tilesToRender.clear();
+    for (int i = -SnowScene::sceneRadius; i <= SnowScene::sceneRadius; i++){
+        for (int j = -SnowScene::sceneRadius; j <= SnowScene::sceneRadius; j++){
+            int x = m_currentTile.x + (j * SnowSceneTile::tileSize);
+            int z = m_currentTile.z + (i * SnowSceneTile::tileSize);
+            if (context->getCamera()->isVisible(m_sceneMap[x][z].getBoundingBox())){
+                m_tilesToRender.push_back(m_sceneMap[x][z]);
+            }
+        }
+    }
 }
 
-void SnowScene::addLightInvDir(glm::vec3 tile){
-    glm::vec3 lightInvDir = createLightInvDir(tile);
-    m_lightInvDir[tile.x][tile.z] = lightInvDir;
+void SnowScene::updateCurrentTile(View *context){
+    m_currentTile.x = round(context->getCamera()->getEye().x / SnowSceneTile::tileSize) * SnowSceneTile::tileSize;
+    m_currentTile.y = 0;
+    m_currentTile.z = round(context->getCamera()->getEye().z / SnowSceneTile::tileSize) * SnowSceneTile::tileSize;
 }
 
-glm::vec3 SnowScene::createLightInvDir(glm::vec3 tile){
-    return glm::vec3(tile.x, tile.y + 2, tile.z - 6);
-}
-
-void SnowScene::addTileToMap(glm::vec3 tile){
-    m_sceneMap[tile.x][tile.z] = SnowSceneTile(tile);
-}
-
-void SnowScene::addDepthMVP(glm::vec3 tile){
-    glm::mat4 depthMVP = createDepthMVP(tile);
-    m_depthMVP[tile.x][tile.z] = depthMVP;
-}
-
-void SnowScene::addDepthBiasMVP(glm::vec3 tile){
-    glm::mat4 depthBiasMVP = createDepthBiasMVP(tile);
-    m_depthBiasMVP[tile.x][tile.z] = depthBiasMVP;
-}
-
-glm::mat4 SnowScene::createDepthMVP(glm::vec3 tile){
-    // Compute the MVP matrix from the light's point of view
-    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-SnowSceneTile::tileSize,
-                                                        SnowSceneTile::tileSize,
-                                                        -SnowSceneTile::tileSize / 2,
-                                                        SnowSceneTile::tileSize / 2,
-                                                        -SnowSceneTile::tileSize,
-                                                        SnowSceneTile::tileSize + 20);
-    glm::mat4 depthViewMatrix = glm::lookAt(m_lightInvDir[tile.x][tile.z], tile, glm::vec3(0,1,0));
-    glm::mat4 depthModelMatrix = glm::mat4(1.0);
-    glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
-    return depthMVP;
-}
-
-glm::mat4 SnowScene::createDepthBiasMVP(glm::vec3 tile){
+void SnowScene::updateDepthMVP(View *context){
     glm::mat4 biasMatrix(
     0.5, 0.0, 0.0, 0.0,
     0.0, 0.5, 0.0, 0.0,
     0.0, 0.0, 0.5, 0.0,
     0.5, 0.5, 0.5, 1.0
     );
-    return biasMatrix * m_depthMVP[tile.x][tile.z];
+    glm::vec3 currentPosition = glm::vec3(context->getCamera()->getEye());
+    // Compute the MVP matrix from the light's point of view
+    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-SnowSceneTile::tileSize,
+                                                        SnowSceneTile::tileSize,
+                                                        -SnowSceneTile::tileSize,
+                                                        SnowSceneTile::tileSize,
+                                                        -SnowSceneTile::tileSize,
+                                                        SnowSceneTile::tileSize + 20);
+    glm::mat4 depthViewMatrix = glm::lookAt(glm::vec3(currentPosition.x, currentPosition.y + 2, currentPosition.z - 6),
+                                            currentPosition, glm::vec3(0,1,0));
+    glm::mat4 depthModelMatrix = glm::mat4(1.0);
+    glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
+
+
+    m_depthMVP = depthMVP;
+    m_depthBiasMVP = biasMatrix * depthMVP;
 }
 
-
 void SnowScene::setPhongUniforms(View *context) {
-    m_phongShader->setUniform("depthBiasMVP", m_depthBiasMVP[m_currentTile.x][m_currentTile.z]);
+    m_phongShader->setUniform("depthBiasMVP", m_depthBiasMVP);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, m_depthTexture);
     GLuint texID = glGetUniformLocation(m_phongShader->getID(), "shadowMap");
@@ -327,6 +317,10 @@ CS123SceneLightData SnowScene::makeLight(int id){
     return light;
 }
 
+void SnowScene::addTile(glm::vec3 tile){
+    m_sceneMap[tile.x][tile.z] = SnowSceneTile(tile);
+}
+
 void SnowScene::updateSceneMap(){
     for (int i = -SnowScene::sceneRadius; i <= SnowScene::sceneRadius; i++){
         for (int j = -SnowScene::sceneRadius; j <= SnowScene::sceneRadius; j++){
@@ -341,44 +335,33 @@ void SnowScene::updateSceneMap(){
 }
 
 void SnowScene::renderScene(View *context, std::unique_ptr<CS123::GL::CS123Shader> &shader){
-    for (int i = -SnowScene::sceneRadius; i <= SnowScene::sceneRadius; i++){
-        for (int j = -SnowScene::sceneRadius; j <= SnowScene::sceneRadius; j++){
-            int x = m_currentTile.x + (j * SnowSceneTile::tileSize);
-            int z = m_currentTile.z + (i * SnowSceneTile::tileSize);
-            glm::vec3 tile(x, 0, z);
-            BoundingBox b(tile, SnowSceneTile::tileSize, SnowSceneTile::tileSize, SnowSceneTile::tileSize);
-            if (context->getCamera()->isVisible(b)){
-                if (isNewTile(tile)){
-                    addTile(tile);
-                }
-                m_sceneMap[x][z].render(context, shader, m_shapes);
-            }
-        }
-    }
+   for (int i = 0; i < m_tilesToRender.size(); i++){
+       m_tilesToRender[i].render(context, shader, m_shapes);
+   }
 }
 
 void SnowScene::renderSkyboxPass(View *context){
            // Clear buffers
-                 glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-                 // Draw skybox first
-                 glDepthMask(GL_FALSE);// Remember to turn depth writing off
-                 m_skyboxShader->bind();
-                 glm::mat4 view = glm::mat4(glm::mat3(context->getCamera()->getViewMatrix()));	// Remove any translation component of the view matrix
-                 glm::mat4 projection = context->getCamera()->getProjectionMatrix();
-                 m_skyboxShader->setUniform("view", view);
-                 m_skyboxShader->setUniform("projection", projection);
-                 // skybox cube
-                 glBindVertexArray(m_skyboxVAO);
-                 glActiveTexture(GL_TEXTURE0);
-                 glUniform1i(glGetUniformLocation(m_skyboxShader->getID(), "skybox"), 0);
-                 glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemapTexture);
-                 glDrawArrays(GL_TRIANGLES, 0, 36);
-                 glBindVertexArray(0);
-                 m_skyboxShader->unbind();
-                 glDepthMask(GL_TRUE);
+         // Draw skybox first
+         glDepthMask(GL_FALSE);// Remember to turn depth writing off
+         m_skyboxShader->bind();
+         glm::mat4 view = glm::mat4(glm::mat3(context->getCamera()->getViewMatrix()));	// Remove any translation component of the view matrix
+         glm::mat4 projection = context->getCamera()->getProjectionMatrix();
+         m_skyboxShader->setUniform("view", view);
+         m_skyboxShader->setUniform("projection", projection);
+         // skybox cube
+         glBindVertexArray(m_skyboxVAO);
+         glActiveTexture(GL_TEXTURE0);
+         glUniform1i(glGetUniformLocation(m_skyboxShader->getID(), "skybox"), 0);
+         glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemapTexture);
+         glDrawArrays(GL_TRIANGLES, 0, 36);
+         glBindVertexArray(0);
+         m_skyboxShader->unbind();
+         glDepthMask(GL_TRUE);
 
 }
 
@@ -405,20 +388,4 @@ GLuint SnowScene::loadCubemap(std::vector<const GLchar*> faces)
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
     return textureID;
-}
-
-
-void SnowScene::updateCurrentTile(glm::vec4 eye){
-    if (eye.x > m_currentTile.x + SnowSceneTile::tileSize / 2){
-        m_currentTile.x += SnowSceneTile::tileSize;
-    }
-    else if (eye.x < m_currentTile.x - SnowSceneTile::tileSize / 2){
-        m_currentTile.x -= SnowSceneTile::tileSize;
-    }
-    else if (eye.z > m_currentTile.z + SnowSceneTile::tileSize / 2){
-        m_currentTile.z += SnowSceneTile::tileSize;
-    }
-    else if (eye.z < m_currentTile.z - SnowSceneTile::tileSize/ 2){
-        m_currentTile.z -= SnowSceneTile::tileSize;
-    }
 }

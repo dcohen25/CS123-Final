@@ -133,7 +133,9 @@ OTHER_FILES += shaders/shader.frag \
     skybox/left.png \
     skybox/right.png \
     skybox/top.png \
-    skybox/bottom.png
+    skybox/bottom.png \
+    shaders/texture/texture.vert \
+    shader/texture/texture.frag
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -168,4 +170,5 @@ DISTFILES += \
     shaders/shadow/shadow.frag \
     shaders/shadow/shadow.vert \
     shaders/skybox/skybox.frag \
-    shaders/skybox/skybox.vert
+    shaders/skybox/skybox.vert \
+    shaders/texture/texture.frag

@@ -97,7 +97,7 @@ bool CamtransCamera::isPointBehindPlane(glm::vec4 plane, glm::vec3 point){
     return plane.x * point.x +
             plane.y * point.y +
             plane.z * point.z +
-            plane.w < 0;
+            plane.w < -.4f;
 }
 
 void CamtransCamera::mouseDragged(int x, int y) {

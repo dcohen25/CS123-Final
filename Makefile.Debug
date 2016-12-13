@@ -148,7 +148,8 @@ DIST          = shaders/normals/normals.vert \
 		shaders/shadow/shadow.frag \
 		shaders/shadow/shadow.vert \
 		shaders/skybox/skybox.frag \
-		shaders/skybox/skybox.vert ui\mainwindow.h \
+		shaders/skybox/skybox.vert \
+		shaders/texture/texture.frag ui\mainwindow.h \
 		ui_mainwindow.h \
 		glew-1.10.0\include\GL\glew.h \
 		ui\view.h \
@@ -3884,7 +3885,7 @@ debug/stb_image_aug.o: soil/stb_image_aug.c soil/stb_image_aug.h \
 		soil/stbi_DDS_aug_c.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o debug\stb_image_aug.o soil\stb_image_aug.c
 
-debug/test_SOIL.o: soil/test_SOIL.cpp soil/SOIL.h
+debug/test_SOIL.o: soil/test_SOIL.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\test_SOIL.o soil\test_SOIL.cpp
 
 debug/qrc_resources.o: debug/qrc_resources.cpp 

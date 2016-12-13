@@ -49,6 +49,7 @@ protected:
     void loadQuadShader();
     void loadShadowShader();
     void loadSkyboxShader();
+    void loadTextureShader();
     void setLights();
     void initLights();
     void updateSceneMap();
@@ -56,29 +57,25 @@ protected:
     void renderPhongPass(View *context);
     void renderShadowPass(View *context);
     void renderSkyboxPass(View *context);
+    void renderTexturePass(View *context);
     void renderQuadPass(View *context);
     void setPhongUniforms(View *context);
     bool createRenderTarget();
-    void updateCurrentTile(glm::vec4 eye);
+    void updateCurrentTile(View *context);
     void setQuadUniforms(View *context);
     void setShadowUniforms(View *context);
     void setSkyboxUniforms(View *context);
+    void setTextureUniforms(View *context);
     bool isNewTile(glm::vec3 tile);
-    void addDepthMVP(glm::vec3 tile);
-    void addDepthBiasMVP(glm::vec3 tile);
-    void addLightInvDir(glm::vec3 tile);
-    glm::mat4 createDepthMVP(glm::vec3 tile);
-    glm::mat4 createDepthBiasMVP(glm::vec3 tile);
-    glm::vec3 createLightInvDir(glm::vec3 tile);
-    void addTile(glm::vec3 tile);
-    void addTileToMap(glm::vec3 tile);
     void renderQuad();
-
+    void addTile(glm::vec3 tile);
+    void updateDepthMVP(View *context);
     void loadSkybox();
     void loadSkyboxVertices();
     void loadSkyboxVAO();
     GLuint loadCubemap(std::vector<const GLchar*> faces);
-
+    void updateTilesToRender(View *context);
+    void loadTexture();
 
     CS123SceneLightData makeLight(int i);
 
@@ -86,18 +83,19 @@ protected:
     std::unique_ptr<CS123::GL::CS123Shader> m_quadShader;
     std::unique_ptr<CS123::GL::CS123Shader> m_shadowShader;
     std::unique_ptr<CS123::GL::CS123Shader> m_skyboxShader;
+    std::unique_ptr<CS123::GL::CS123Shader> m_textureShader;
     std::vector<CS123SceneLightData> m_lights;
-    std::map<int, std::map<int, glm::mat4>> m_depthMVP;
-    std::map<int, std::map<int, glm::mat4>> m_depthBiasMVP;
-    std::map<int, std::map<int, glm::vec3>> m_lightInvDir;
     std::map<int, std::map<int, SnowSceneTile>> m_sceneMap;
-    glm::vec3 m_currentTile;
     GLuint m_FramebufferName;
     GLuint m_depthTexture;
     GLuint m_skyboxTexture;
+    GLuint m_barkTexture;
     GLuint m_skyboxVAO, m_skyboxVBO;
     GLuint m_cubemapTexture;
-
+    glm::vec3 m_currentTile;
+    glm::mat4 m_depthMVP;
+    glm::mat4 m_depthBiasMVP;
+    std::vector<SnowSceneTile> m_tilesToRender;
 };
 
 #endif // SCENEVIEWSCENE_H

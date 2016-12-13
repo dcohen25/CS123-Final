@@ -29,7 +29,7 @@ OpenGLShape::~OpenGLShape()
 // render shape
 void OpenGLShape::render(){
     tesselate();
-    setVertexData(m_vertices.data(), m_vertices.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, m_vertices.size() / 3);
+    setVertexData(m_vertices.data(), m_vertices.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, m_vertices.size() / 6);
     setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
     setAttribute(ShaderAttrib::NORMAL, 3, sizeof(float) * 3, VBOAttribMarker::DATA_TYPE::FLOAT, false);
     buildVAO();

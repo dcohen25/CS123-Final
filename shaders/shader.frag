@@ -42,7 +42,7 @@ float random(vec3 seed, int i){
 
 
 void main(){
-    float bias = 0.005;
+    float bias = 0.010;
 
     float visibility = 1.0;
 
