@@ -1,5 +1,6 @@
 #include "terrain.h"
 #include "gl/shaders/ShaderAttribLocations.h"
+#include <iostream>
 
 Terrain::Terrain(float width) :
     m_numRows(100),
@@ -33,7 +34,12 @@ Terrain::~Terrain() {
  * Returns a pseudo-random value between -1.0 and 1.0 for the given row and column.
  */
 float Terrain::randValue(int row, int col) {
-    return 0.4 * glm::fract(sin(row * 127.1f + col * 311.7f) * 43758.5453123f);
+    if ((row >= 0 && row <= 1) || (row >= 5 && row <= 6) || (col >= 0 && col <= 1) || (col >= 5 && col <= 6)) {
+        std::cout << row << ", " << col << std::endl;
+        return 0;
+    }
+
+    return 0.45 * glm::fract(sin(row * 127.1f + col * 311.7f) * 43758.5453123f);
 }
 
 
@@ -42,13 +48,13 @@ float Terrain::randValue(int row, int col) {
  */
 glm::vec3 Terrain::getPosition(int row, int col) {
     glm::vec3 position;
-    position.x = 5 * row/m_numRows;
+    position.x = m_width * row/m_numRows - m_width / 2;
     position.y = 0;
-    position.z = 5 * col/m_numCols;
+    position.z = m_width * col/m_numCols - m_width / 2;
 
     // TODO: Adjust position.y using value noise.
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 1; i++) {
         int row_small = row / (20.0 / pow(2, i));
         int col_small = col / (20.0 / pow(2, i));
         float row_fract = glm::fract(row / (20.0 / pow(2, i)));
@@ -98,52 +104,64 @@ glm::vec3 Terrain::getNormal(int row, int col) {
     glm::vec3 normal(sum.x / 8.0, sum.y / 8.0, sum.z / 8.0);
 
     return glm::normalize(normal);
+    return glm::vec3(0, 1, 0);
 }
 
 void Terrain::tesselate() {
     int numVertices = (m_numRows - 1) * (2 * m_numCols + 2);
-    m_vertices.resize(6 * numVertices);
-    int index = 0;
+//    m_vertices.resize(6 * numVertices);
+//    int index = 0;
     glm::vec3 temp;
     for (int row = 0; row < m_numRows - 1; row++) {
         for (int col = m_numCols - 1; col >= 0; col--) {
             temp = getPosition(row, col);
-            m_vertices[index++] = temp.x;
-            m_vertices[index++] = temp.y;
-            m_vertices[index++] = temp.z;
+//            m_vertices[index++] = temp.x;
+//            m_vertices[index++] = temp.y;
+//            m_vertices[index++] = temp.z;
+            m_vertices.push_back(temp.x);
+            m_vertices.push_back(temp.y);
+            m_vertices.push_back(temp.z);
             temp = getNormal  (row, col);
-            m_vertices[index++] = temp.x;
-            m_vertices[index++] = temp.y;
-            m_vertices[index++] = temp.z;
+            m_vertices.push_back(temp.x);
+            m_vertices.push_back(temp.y);
+            m_vertices.push_back(temp.z);
             temp = getPosition(row + 1, col);
-            m_vertices[index++] = temp.x;
-            m_vertices[index++] = temp.y;
-            m_vertices[index++] = temp.z;
+            m_vertices.push_back(temp.x);
+            m_vertices.push_back(temp.y);
+            m_vertices.push_back(temp.z);
             temp = getNormal  (row + 1, col);
-            m_vertices[index++] = temp.x;
-            m_vertices[index++] = temp.y;
-            m_vertices[index++] = temp.z;
+            m_vertices.push_back(temp.x);
+            m_vertices.push_back(temp.y);
+            m_vertices.push_back(temp.z);
         }
         temp = getPosition(row + 1, 0);
-        m_vertices[index++] = temp.x;
-        m_vertices[index++] = temp.y;
-        m_vertices[index++] = temp.z;
+        m_vertices.push_back(temp.x);
+        m_vertices.push_back(temp.y);
+        m_vertices.push_back(temp.z);
         temp = getNormal  (row + 1, 0);
-        m_vertices[index++] = temp.x;
-        m_vertices[index++] = temp.y;
-        m_vertices[index++] = temp.z;
+        m_vertices.push_back(temp.x);
+        m_vertices.push_back(temp.y);
+        m_vertices.push_back(temp.z);
         temp = getPosition(row + 1, m_numCols - 1);
-        m_vertices[index++] = temp.x;
-        m_vertices[index++] = temp.y;
-        m_vertices[index++] = temp.z;
+        m_vertices.push_back(temp.x);
+        m_vertices.push_back(temp.y);
+        m_vertices.push_back(temp.z);
         temp = getNormal  (row + 1, m_numCols - 1);
-        m_vertices[index++] = temp.x;
-        m_vertices[index++] = temp.y;
-        m_vertices[index++] = temp.z;
+        m_vertices.push_back(temp.x);
+        m_vertices.push_back(temp.y);
+        m_vertices.push_back(temp.z);
     }
+}
 
-    setVertexData(&m_vertices[0][0], m_vertices.size() * 3, VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLE_STRIP, numVertices);
+void Terrain::render() {
+    tesselate();
+
+    setVertexData(m_vertices.data(), m_vertices.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLE_STRIP, m_vertices.size() / 6);
     setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
-    setAttribute(ShaderAttrib::NORMAL, 3, sizeof(glm::vec3), VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    setAttribute(ShaderAttrib::NORMAL, 3, sizeof(GLfloat)  * 3, VBOAttribMarker::DATA_TYPE::FLOAT, false);
     buildVAO();
+
+//    for (auto i = m_vertices.begin(); i != m_vertices.end(); ++i)
+//        std::cout << *i << ' ';
+//    std::cout << std::endl;
 }

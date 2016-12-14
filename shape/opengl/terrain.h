@@ -17,6 +17,7 @@ private:
     glm::vec3 getPosition(int row, int col);
     glm::vec3 getNormal(int row, int col);
     void tesselate() override;
+    void render() override;
 
     int m_numRows, m_numCols;
     float m_width;

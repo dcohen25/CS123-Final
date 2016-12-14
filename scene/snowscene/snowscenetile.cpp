@@ -61,9 +61,9 @@ void SnowSceneTile::initScene(){
 }
 
 void SnowSceneTile::initSnow(){
-//    Snow snow = Snow(m_coords);
-//    m_sceneObjects.push_back(snow);
-    m_terrain = std::make_unique<Terrain>(tileSize);
+    Snow snow = Snow(m_coords);
+    m_sceneObjects.push_back(snow);
+//    m_terrain = std::make_unique<Terrain>(tileSize);
 }
 
 void SnowSceneTile::initTrees(){
@@ -96,7 +96,7 @@ void SnowSceneTile::render(std::unique_ptr<CS123Shader> &shader, std::map<Primit
         m_sceneObjects[i].render(shader, shapes);
     }
     // TODO: render terrain
-    m_terrain->draw();
+//    m_terrain->draw();
 }
 
 glm::vec3 SnowSceneTile::getRandomPositionOnTile(){
