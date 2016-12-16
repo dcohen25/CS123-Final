@@ -29,38 +29,27 @@ OpenGLShape::~OpenGLShape()
 // render shape
 void OpenGLShape::render(){
     tesselate();
-    setVertexData(m_vertices.data(), m_vertices.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, m_vertices.size() / 6);
+    setVertexData(m_vertices.data(), m_vertices.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, m_vertices.size() / 8);
     setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
     setAttribute(ShaderAttrib::NORMAL, 3, sizeof(float) * 3, VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    setAttribute(ShaderAttrib::TEXCOORD0, 2, sizeof(float) * 6, VBOAttribMarker::DATA_TYPE::FLOAT, false);
+
     buildVAO();
 }
 
 // add vertices
-void OpenGLShape::addVertices(glm::vec4 topVertex, glm::vec4 topNormal, glm::vec4 leftVertex, glm::vec4 leftNormal, glm::vec4 rightVertex, glm::vec4 rightNormal){
-    // top vertex
-    m_vertices.push_back(topVertex[0]);
-    m_vertices.push_back(topVertex[1]);
-    m_vertices.push_back(topVertex[2]);
+void OpenGLShape::addVertices(glm::vec4 vertex, glm::vec4 normal, glm::vec2 uv){
+    // top verte6
+    m_vertices.push_back(vertex[0]);
+    m_vertices.push_back(vertex[1]);
+    m_vertices.push_back(vertex[2]);
     // top normal
-    m_vertices.push_back(topNormal[0]);
-    m_vertices.push_back(topNormal[1]);
-    m_vertices.push_back(topNormal[2]);
-    // left vertex
-    m_vertices.push_back(leftVertex[0]);
-    m_vertices.push_back(leftVertex[1]);
-    m_vertices.push_back(leftVertex[2]);
-    // left normal
-    m_vertices.push_back(leftNormal[0]);
-    m_vertices.push_back(leftNormal[1]);
-    m_vertices.push_back(leftNormal[2]);
-    // right vertex
-    m_vertices.push_back(rightVertex[0]);
-    m_vertices.push_back(rightVertex[1]);
-    m_vertices.push_back(rightVertex[2]);
-    // right normal
-    m_vertices.push_back(rightNormal[0]);
-    m_vertices.push_back(rightNormal[1]);
-    m_vertices.push_back(rightNormal[2]);
+    m_vertices.push_back(normal[0]);
+    m_vertices.push_back(normal[1]);
+    m_vertices.push_back(normal[2]);
+    // top uv
+    m_vertices.push_back(uv[0]);
+    m_vertices.push_back(uv[1]);
 }
 
 /**

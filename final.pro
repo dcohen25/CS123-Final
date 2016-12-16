@@ -64,7 +64,8 @@ SOURCES += ui/mainwindow.cpp \
     soil/image_helper.c \
     soil/SOIL.c \
     soil/stb_image_aug.c \
-    soil/test_SOIL.cpp
+    soil/test_SOIL.cpp \
+    scene/snowscene/snowscenetextures.cpp
 
 HEADERS += ui/mainwindow.h \
     ui_mainwindow.h \
@@ -113,7 +114,8 @@ HEADERS += ui/mainwindow.h \
     soil/SOIL.h \
     soil/stb_image_aug.h \
     soil/stbi_DDS_aug.h \
-    soil/stbi_DDS_aug_c.h
+    soil/stbi_DDS_aug_c.h \
+    scene/snowscene/snowscenetextures.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
@@ -135,7 +137,10 @@ OTHER_FILES += shaders/shader.frag \
     skybox/top.png \
     skybox/bottom.png \
     shaders/texture/texture.vert \
-    shader/texture/texture.frag
+    shader/texture/texture.frag \
+    images/tree/tree-top.jpg \
+    images/tree/tree-bark.jpg \
+    images/snowman/snowman-face.jpg
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2

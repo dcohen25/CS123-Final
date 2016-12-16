@@ -19,6 +19,7 @@ private:
     float m_phi; // sphere phi
     void tesselate() override;  // tesselate a sphere
     glm::vec4 getNormal(glm::vec4 vertex); // get normal at vertex
+    glm::vec2 getTextureMap(glm::vec4 intersect);
 
 };
 

@@ -14,6 +14,7 @@ private:
     glm::mat4x4 m_transform; // transform
     float m_size; // square size;
     void tesselate() override;  // tesselate a Square
+    glm::vec2 getTextureMap(glm::vec4 intersect);
 
 };
 

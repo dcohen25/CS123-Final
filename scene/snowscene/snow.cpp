@@ -14,10 +14,22 @@ Snow::~Snow(){
 
 }
 
+void Snow::renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) {
+    shader->setUniform("m", m_snowTransformation);
+    shapes[m_snowPrimitive.type]->draw();
+}
+
+void Snow::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) {
+    shader->setUniform("m", m_snowTransformation);
+    shader->applyMaterial(m_snowPrimitive.material);
+    shapes[m_snowPrimitive.type]->draw();
+}
+
 void Snow::initSnow(){
     initSnowPrimitive();
     initSnowTransformation();
 }
+
 
 void Snow::initSnowPrimitive(){
     CS123ScenePrimitive snow;
@@ -32,7 +44,7 @@ void Snow::initSnowPrimitive(){
     snow.material.cSpecular.r = snow.material.cSpecular.g = snow.material.cSpecular.b = 0;
     snow.material.shininess = 0;
 
-    m_primitives.push_back(snow);
+    m_snowPrimitive = snow;
 }
 
 void Snow::initSnowTransformation(){
@@ -40,5 +52,5 @@ void Snow::initSnowTransformation(){
     snowTransformation = glm::translate(snowTransformation, glm::vec3(m_coords.x, m_coords.y - SnowSceneTile::tileSize / 2, m_coords.z));
     snowTransformation = glm::scale(snowTransformation, glm::vec3(SnowSceneTile::tileSize, SnowSceneTile::tileSize, SnowSceneTile::tileSize));
 
-    m_transformations.push_back(snowTransformation);
+    m_snowTransformation = snowTransformation;
 }

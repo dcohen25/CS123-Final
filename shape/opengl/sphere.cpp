@@ -41,7 +41,9 @@ void Sphere::tesselate() {
                 glm::vec4 leftNormal(getNormal(leftVertex));
                 glm::vec4 rightNormal(getNormal(rightVertex));
                 // create tile of verteces and normals
-                addVertices(m_transform * topVertex, m_transform * topNormal, m_transform * leftVertex, m_transform * leftNormal, m_transform * rightVertex, m_transform * rightNormal);
+                addVertices(m_transform * topVertex, m_transform * topNormal, getTextureMap(topVertex));
+                addVertices(m_transform * leftVertex, m_transform * leftNormal, getTextureMap(leftVertex));
+                addVertices(m_transform * rightVertex, m_transform * rightNormal, getTextureMap(rightVertex));
             }
             if (i > 0 && i < m_xTess - 1){
                 // get adjacent tile verteces
@@ -53,7 +55,9 @@ void Sphere::tesselate() {
                 glm::vec4 leftNormal(getNormal(leftVertex));
                 glm::vec4 rightNormal(getNormal(rightVertex));
                 // create tile of verteces and normals
-                addVertices(m_transform * topVertex, m_transform * topNormal, m_transform * leftVertex, m_transform * leftNormal, m_transform * rightVertex, m_transform * rightNormal);
+                addVertices(m_transform * topVertex, m_transform * topNormal, getTextureMap(topVertex));
+                addVertices(m_transform * leftVertex, m_transform * leftNormal, getTextureMap(leftVertex));
+                addVertices(m_transform * rightVertex, m_transform * rightNormal, getTextureMap(rightVertex));
             }
             else if (i == m_xTess - 1){
                 // get bottom tile verteces
@@ -65,10 +69,31 @@ void Sphere::tesselate() {
                 glm::vec4 leftNormal(getNormal(leftVertex));
                 glm::vec4 rightNormal(getNormal(rightVertex));
                 // create tile of verteces and normals
-                addVertices(m_transform * topVertex, m_transform * topNormal, m_transform * leftVertex, m_transform * leftNormal, m_transform * rightVertex, m_transform * rightNormal);
+                addVertices(m_transform * topVertex, m_transform * topNormal, getTextureMap(topVertex));
+                addVertices(m_transform * leftVertex, m_transform * leftNormal, getTextureMap(leftVertex));
+                addVertices(m_transform * rightVertex, m_transform * rightNormal, getTextureMap(rightVertex));
             }
         }
     }
+}
+
+glm::vec2 Sphere::getTextureMap(glm::vec4 intersect){
+    glm::vec2 coords;
+    float phi = asin(intersect.y / .5);
+    coords.y = -(phi / M_PI) + .5;
+    if (coords.y == 0 || coords.y == 1){
+        coords.x = .5;
+    }
+    else {
+        float theta = atan2(intersect.z, intersect.x);
+        if (theta < 0){
+            coords.x = -theta / (2.0 * M_PI);
+        }
+        else {
+            coords.x = (theta / (2.0 * M_PI));
+        }
+    }
+    return coords;
 }
 
 // get normal

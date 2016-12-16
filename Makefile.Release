@@ -86,7 +86,8 @@ SOURCES       = ui\mainwindow.cpp \
 		soil\image_helper.c \
 		soil\SOIL.c \
 		soil\stb_image_aug.c \
-		soil\test_SOIL.cpp release\qrc_resources.cpp \
+		soil\test_SOIL.cpp \
+		scene\snowscene\snowscenetextures.cpp release\qrc_resources.cpp \
 		release\moc_mainwindow.cpp \
 		release\moc_view.cpp
 OBJECTS       = release/mainwindow.o \
@@ -133,6 +134,7 @@ OBJECTS       = release/mainwindow.o \
 		release/SOIL.o \
 		release/stb_image_aug.o \
 		release/test_SOIL.o \
+		release/snowscenetextures.o \
 		release/qrc_resources.o \
 		release/moc_mainwindow.o \
 		release/moc_view.o
@@ -196,7 +198,8 @@ DIST          = shaders/normals/normals.vert \
 		soil\SOIL.h \
 		soil\stb_image_aug.h \
 		soil\stbi_DDS_aug.h \
-		soil\stbi_DDS_aug_c.h ui\mainwindow.cpp \
+		soil\stbi_DDS_aug_c.h \
+		scene\snowscene\snowscenetextures.h ui\mainwindow.cpp \
 		main.cpp \
 		glew-1.10.0\src\glew.c \
 		ui\view.cpp \
@@ -239,7 +242,8 @@ DIST          = shaders/normals/normals.vert \
 		soil\image_helper.c \
 		soil\SOIL.c \
 		soil\stb_image_aug.c \
-		soil\test_SOIL.cpp
+		soil\test_SOIL.cpp \
+		scene\snowscene\snowscenetextures.cpp
 QMAKE_TARGET  = final
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = final.exe
@@ -278,7 +282,7 @@ dist:
 	$(ZIP) final.zip $(SOURCES) $(DIST) final.pro C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\spec_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\qdevice.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\device_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\qconfig.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquickrenderer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3dquickrenderer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3drenderer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_3drenderer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_core.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_dbus.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_declarative.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_declarative_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_enginio.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_enginio_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_help.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_location.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_location_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_network.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_script.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkit.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkit_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkitwidgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt_functions.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\qt_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\win32-g++\qmake.conf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\spec_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exclusive_builds.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\default_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\default_pre.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\resolve_config.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\default_post.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\build_pass.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\c++11.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\c++14.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\rtti.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\precompile_header.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\warn_on.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\qt.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\resources.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\moc.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\opengl.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\uic.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\win32\windows.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\testcase_targets.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\exceptions.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\yacc.prf C:\Qt\Qt5.5.0\5.5\mingw492_32\mkspecs\features\lex.prf final.pro resources.qrc C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/qtmain.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5OpenGL.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Widgets.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Gui.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Xml.prl C:/Qt/Qt5.5.0/5.5/mingw492_32/lib/Qt5Core.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\mainwindow.o release\main.o release\glew.o release\view.o release\viewformat.o release\openglscene.o release\resourceloader.o release\Shader.o release\GLDebug.o release\Texture.o release\FBO.o release\VBO.o release\VAO.o release\VBOAttribMarker.o release\CS123Shader.o release\IBO.o release\Texture2D.o release\TextureParameters.o release\TextureParametersBuilder.o release\FullScreenQuad.o release\GBufferShader.o release\RenderBuffer.o release\DepthBuffer.o release\circle.o release\square.o release\cone.o release\cube.o release\sphere.o release\cylinder.o release\openglshape.o release\camtranscamera.o release\snowscene.o release\snowscenetile.o release\tree.o release\utils.o release\snowman.o release\snow.o release\snowsceneobject.o release\boundingbox.o release\image_DXT.o release\image_helper.o release\SOIL.o release\stb_image_aug.o release\test_SOIL.o release\qrc_resources.o release\moc_mainwindow.o release\moc_view.o
+	-$(DEL_FILE) release\mainwindow.o release\main.o release\glew.o release\view.o release\viewformat.o release\openglscene.o release\resourceloader.o release\Shader.o release\GLDebug.o release\Texture.o release\FBO.o release\VBO.o release\VAO.o release\VBOAttribMarker.o release\CS123Shader.o release\IBO.o release\Texture2D.o release\TextureParameters.o release\TextureParametersBuilder.o release\FullScreenQuad.o release\GBufferShader.o release\RenderBuffer.o release\DepthBuffer.o release\circle.o release\square.o release\cone.o release\cube.o release\sphere.o release\cylinder.o release\openglshape.o release\camtranscamera.o release\snowscene.o release\snowscenetile.o release\tree.o release\utils.o release\snowman.o release\snow.o release\snowsceneobject.o release\boundingbox.o release\image_DXT.o release\image_helper.o release\SOIL.o release\stb_image_aug.o release\test_SOIL.o release\snowscenetextures.o release\qrc_resources.o release\moc_mainwindow.o release\moc_view.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -303,7 +307,12 @@ release/qrc_resources.cpp: resources.qrc \
 		shaders/quad/quad.vert \
 		shaders/shadow/shadow.frag \
 		shaders/shader.vert \
-		shaders/skybox/skybox.frag
+		shaders/skybox/skybox.frag \
+		images/tree/tree-bark.jpg \
+		images/solid-color-45244-46449-hd-wallpapers.jpg \
+		images/tree/tree-top.jpg \
+		images/snowman/snowman-face.jpg \
+		images/blue.jpg
 	C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\rcc.exe -name resources resources.qrc -o release\qrc_resources.cpp
 
 compiler_moc_header_make_all: release/moc_mainwindow.cpp release/moc_view.cpp
@@ -542,7 +551,6 @@ release/moc_view.cpp: glew-1.10.0/include/GL/glew.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
 		camera/camera.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
@@ -626,22 +634,8 @@ release/moc_view.cpp: glew-1.10.0/include/GL/glew.h \
 		gl/shaders/Shader.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
-		scene/snowscene/snowscene.h \
-		scene/snowscene/snowscenetile.h \
-		scene/snowscene/snowsceneobject.h \
-		shape/opengl/cube.h \
-		shape/opengl/square.h \
-		shape/opengl/cone.h \
-		shape/opengl/circle.h \
-		shape/opengl/sphere.h \
-		shape/opengl/cylinder.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
 		ui/view.h
 	C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.5.0/5.5/mingw492_32/mkspecs/win32-g++ -I"C:/Users/David/OneDrive/Docs/Brown/Classes/2017/CSCI 1230/final" -I"C:/Users/David/OneDrive/Docs/Brown/Classes/2017/CSCI 1230/final/glm" -I"C:/Users/David/OneDrive/Docs/Brown/Classes/2017/CSCI 1230/final/ui" -I"C:/Users/David/OneDrive/Docs/Brown/Classes/2017/CSCI 1230/final/glew-1.10.0/include" -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtXml -IC:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore ui\view.h -o release\moc_view.cpp
 
@@ -777,7 +771,6 @@ ui_mainwindow.h: ui/mainwindow.ui \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
 		camera/camera.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
@@ -861,22 +854,8 @@ ui_mainwindow.h: ui/mainwindow.ui \
 		gl/shaders/Shader.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
-		gl/datatype/VBOAttribMarker.h \
-		scene/snowscene/snowscene.h \
-		scene/snowscene/snowscenetile.h \
-		scene/snowscene/snowsceneobject.h \
-		shape/opengl/cube.h \
-		shape/opengl/square.h \
-		shape/opengl/cone.h \
-		shape/opengl/circle.h \
-		shape/opengl/sphere.h \
-		shape/opengl/cylinder.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl
+		gl/datatype/VBOAttribMarker.h
 	C:\Qt\Qt5.5.0\5.5\mingw492_32\bin\uic.exe ui\mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -1059,7 +1038,6 @@ release/mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
 		camera/camera.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
@@ -1143,22 +1121,8 @@ release/mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		gl/shaders/Shader.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
-		scene/snowscene/snowscene.h \
-		scene/snowscene/snowscenetile.h \
-		scene/snowscene/snowsceneobject.h \
-		shape/opengl/cube.h \
-		shape/opengl/square.h \
-		shape/opengl/cone.h \
-		shape/opengl/circle.h \
-		shape/opengl/sphere.h \
-		shape/opengl/cylinder.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLFormat
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ui\mainwindow.cpp
 
@@ -1408,7 +1372,6 @@ release/view.o: ui/view.cpp ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
 		camera/camera.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
@@ -1492,22 +1455,8 @@ release/view.o: ui/view.cpp ui/view.h \
 		gl/shaders/Shader.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
-		scene/snowscene/snowscene.h \
-		scene/snowscene/snowscenetile.h \
-		scene/snowscene/snowsceneobject.h \
-		shape/opengl/cube.h \
-		shape/opengl/square.h \
-		shape/opengl/cone.h \
-		shape/opengl/circle.h \
-		shape/opengl/sphere.h \
-		shape/opengl/cylinder.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
 		ui/viewformat.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLFormat \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/QApplication \
@@ -1517,7 +1466,18 @@ release/view.o: ui/view.cpp ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qguiapplication.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qinputmethod.h \
-		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QKeyEvent
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QKeyEvent \
+		scene/snowscene/snowscene.h \
+		scene/snowscene/snowscenetile.h \
+		scene/snowscene/snowsceneobject.h \
+		shape/opengl/cube.h \
+		shape/opengl/square.h \
+		shape/opengl/cone.h \
+		shape/opengl/circle.h \
+		shape/opengl/sphere.h \
+		shape/opengl/cylinder.h \
+		scene/snowscene/snowscenetextures.h \
+		camera/camtranscamera.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\view.o ui\view.cpp
 
 release/viewformat.o: ui/viewformat.cpp ui/viewformat.h \
@@ -1725,7 +1685,6 @@ release/openglscene.o: scene/openglscene.cpp scene/openglscene.h \
 		glew-1.10.0/include/GL/glew.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cone.h \
@@ -2139,7 +2098,6 @@ release/DepthBuffer.o: gl/textures/DepthBuffer.cpp gl/textures/DepthBuffer.h \
 release/circle.o: shape/opengl/circle.cpp shape/opengl/circle.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2223,7 +2181,6 @@ release/circle.o: shape/opengl/circle.cpp shape/opengl/circle.h \
 release/square.o: shape/opengl/square.cpp shape/opengl/square.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2307,7 +2264,6 @@ release/square.o: shape/opengl/square.cpp shape/opengl/square.h \
 release/cone.o: shape/opengl/cone.cpp shape/opengl/cone.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2397,7 +2353,6 @@ release/cube.o: shape/opengl/cube.cpp shape/opengl/cube.h \
 		shape/opengl/square.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2485,7 +2440,6 @@ release/cube.o: shape/opengl/cube.cpp shape/opengl/cube.h \
 release/sphere.o: shape/opengl/sphere.cpp shape/opengl/sphere.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2570,7 +2524,6 @@ release/sphere.o: shape/opengl/sphere.cpp shape/opengl/sphere.h \
 release/cylinder.o: shape/opengl/cylinder.cpp shape/opengl/cylinder.h \
 		shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2658,7 +2611,6 @@ release/cylinder.o: shape/opengl/cylinder.cpp shape/opengl/cylinder.h \
 
 release/openglshape.o: shape/opengl/openglshape.cpp shape/opengl/openglshape.h \
 		glew-1.10.0/include/GL/glew.h \
-		shape/shape.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -2908,7 +2860,6 @@ release/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
 		glew-1.10.0/include/GL/glew.h \
 		lib/cs123scenedata.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		scene/snowscene/snowscenetile.h \
@@ -2920,12 +2871,7 @@ release/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
 		scene/boundingbox.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
-		camera/camera.h \
-		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLWidget \
+		ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
@@ -3045,31 +2991,27 @@ release/snowscene.o: scene/snowscene/snowscene.cpp scene/snowscene/snowscene.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
-		ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
+		camera/camera.h \
+		scene/snowscene/snowscenetextures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLWidget \
 		lib/resourceloader.h \
-		glm/gtx/string_cast.hpp \
-		glm/gtx/integer.hpp \
-		glm/gtx/integer.inl \
-		glm/gtx/quaternion.hpp \
-		glm/gtc/constants.hpp \
-		glm/gtc/constants.inl \
-		glm/gtc/quaternion.hpp \
-		glm/gtc/quaternion.inl \
-		glm/gtx/norm.hpp \
-		glm/gtx/norm.inl \
-		glm/gtx/string_cast.inl \
+		glm/gtc/matrix_transform.hpp \
+		glm/gtc/matrix_transform.inl \
+		glm/gtx/transform.hpp \
+		glm/gtx/transform.inl \
 		gl/util/FullScreenQuad.h \
 		gl/datatype/VAO.h \
 		soil/SOIL.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\snowscene.o scene\snowscene\snowscene.cpp
 
 release/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snowscenetile.h \
+		scene/snowscene/snowsceneobject.h \
+		lib/cs123scenedata.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -3146,13 +3088,10 @@ release/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snows
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
-		lib/cs123scenedata.h \
-		scene/snowscene/snowsceneobject.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cube.h \
@@ -3162,11 +3101,7 @@ release/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snows
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
 		scene/boundingbox.h \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
-		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLWidget \
+		ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
@@ -3286,31 +3221,19 @@ release/snowscenetile.o: scene/snowscene/snowscenetile.cpp scene/snowscene/snows
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
-		ui/view.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
 		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
-		camera/camtranscamera.h \
 		camera/camera.h \
 		scene/openglscene.h \
-		scene/snowscene/snowscene.h \
-		lib/resourceloader.h \
-		glm/gtx/string_cast.hpp \
-		glm/gtx/integer.hpp \
-		glm/gtx/integer.inl \
-		glm/gtx/quaternion.hpp \
-		glm/gtc/constants.hpp \
-		glm/gtc/constants.inl \
-		glm/gtc/quaternion.hpp \
-		glm/gtc/quaternion.inl \
-		glm/gtx/norm.hpp \
-		glm/gtx/norm.inl \
-		glm/gtx/string_cast.inl \
+		scene/snowscene/snowscenetextures.h \
 		scene/utils.h \
 		scene/snowscene/tree.h \
 		scene/snowscene/snowman.h \
+		gl/textures/Texture2D.h \
+		gl/textures/Texture.h \
 		scene/snowscene/snow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\snowscenetile.o scene\snowscene\snowscenetile.cpp
 
@@ -3397,7 +3320,6 @@ release/tree.o: scene/snowscene/tree.cpp scene/snowscene/tree.h \
 		gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cube.h \
@@ -3407,6 +3329,134 @@ release/tree.o: scene/snowscene/tree.cpp scene/snowscene/tree.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
 		scene/boundingbox.h \
+		ui/view.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qconfig.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfeatures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypetraits.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsysinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlogging.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qflags.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmutex.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnumeric.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qt_windows.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/KHR/khrplatform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengles2ext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopenglext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnamespace.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qarraydata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmetatype.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qisenum.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintengine.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpen.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qglcolormap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
+		camera/camera.h \
+		scene/openglscene.h \
+		scene/snowscene/snowscenetextures.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3575,7 +3625,6 @@ release/snowman.o: scene/snowscene/snowman.cpp scene/snowscene/snowman.h \
 		gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cube.h \
@@ -3585,14 +3634,140 @@ release/snowman.o: scene/snowscene/snowman.cpp scene/snowscene/snowman.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
 		scene/boundingbox.h \
+		ui/view.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qconfig.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfeatures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypetraits.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsysinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlogging.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qflags.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmutex.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnumeric.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qt_windows.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/KHR/khrplatform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengles2ext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopenglext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnamespace.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qarraydata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmetatype.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qisenum.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintengine.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpen.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qglcolormap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
+		camera/camera.h \
+		scene/openglscene.h \
+		scene/snowscene/snowscenetextures.h \
+		gl/textures/Texture2D.h \
+		gl/textures/Texture.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
-		glm/gtx/transform.inl \
-		scene/snowscene/snowscene.h \
-		scene/openglscene.h \
-		scene/snowscene/snowscenetile.h \
-		camera/camera.h
+		glm/gtx/transform.inl
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\snowman.o scene\snowscene\snowman.cpp
 
 release/snow.o: scene/snowscene/snow.cpp scene/snowscene/snow.h \
@@ -3678,7 +3853,6 @@ release/snow.o: scene/snowscene/snow.cpp scene/snowscene/snow.h \
 		gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cube.h \
@@ -3688,6 +3862,134 @@ release/snow.o: scene/snowscene/snow.cpp scene/snowscene/snow.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
 		scene/boundingbox.h \
+		ui/view.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qconfig.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfeatures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypetraits.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsysinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlogging.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qflags.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmutex.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnumeric.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qt_windows.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/KHR/khrplatform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengles2ext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopenglext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnamespace.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qarraydata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmetatype.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qisenum.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintengine.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpen.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qglcolormap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
+		camera/camera.h \
+		scene/openglscene.h \
+		scene/snowscene/snowscenetextures.h \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.hpp \
@@ -3777,7 +4079,6 @@ release/snowsceneobject.o: scene/snowscene/snowsceneobject.cpp scene/snowscene/s
 		gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
 		shape/opengl/openglshape.h \
-		shape/shape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
 		shape/opengl/cube.h \
@@ -3786,7 +4087,135 @@ release/snowsceneobject.o: scene/snowscene/snowsceneobject.cpp scene/snowscene/s
 		shape/opengl/circle.h \
 		shape/opengl/sphere.h \
 		shape/opengl/cylinder.h \
-		scene/boundingbox.h
+		scene/boundingbox.h \
+		ui/view.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qconfig.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfeatures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypetraits.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsysinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlogging.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qflags.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmutex.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnumeric.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qt_windows.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/KHR/khrplatform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengles2ext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopenglext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnamespace.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qarraydata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmetatype.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qisenum.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintengine.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpen.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qglcolormap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTime \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatetime.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/QTimer \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtimer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasictimer.h \
+		camera/camera.h \
+		scene/openglscene.h \
+		scene/snowscene/snowscenetextures.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\snowsceneobject.o scene\snowscene\snowsceneobject.cpp
 
 release/boundingbox.o: scene/boundingbox.cpp scene/boundingbox.h \
@@ -3887,6 +4316,129 @@ release/stb_image_aug.o: soil/stb_image_aug.c soil/stb_image_aug.h \
 
 release/test_SOIL.o: soil/test_SOIL.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\test_SOIL.o soil\test_SOIL.cpp
+
+release/snowscenetextures.o: scene/snowscene/snowscenetextures.cpp scene/snowscene/snowscenetextures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/QGLWidget \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qgl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qconfig.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfeatures.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsystemdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qprocessordetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcompilerdetection.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypeinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtypetraits.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsysinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlogging.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qflags.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbasicatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qgenericatomic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_gcc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_msvc.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv7.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv6.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_armv5.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_ia64.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_mips.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_x86.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qatomic_unix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qglobalstatic.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmutex.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnumeric.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qt_windows.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES3/gl3platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/KHR/khrplatform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtANGLE/GLES2/gl2platform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopengles2ext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qopenglext.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qwidget.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qnamespace.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstring.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qchar.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrefcount.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qarraydata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringbuilder.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qalgorithms.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiterator.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qbytearraylist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringlist.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qregexp.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qstringmatcher.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcoreevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qscopedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmetatype.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvarlengtharray.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontainerfwd.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qisenum.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qobject_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmargins.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qrect.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsize.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpoint.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpalette.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcolor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qrgb.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qbrush.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qpair.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvector.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qmatrix.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpolygon.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qregion.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdatastream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qiodevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qline.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtransform.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainterpath.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qimage.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixelformat.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpixmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qshareddata.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qhash.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfont.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontmetrics.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qfontinfo.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qcursor.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qkeysequence.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qevent.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qvariant.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qmap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qdebug.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qtextstream.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qlocale.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qset.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qcontiguouscache.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurl.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qurlquery.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfile.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtCore/qfiledevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qvector2d.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpaintengine.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpainter.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qtextoption.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qpen.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qglcolormap.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtOpenGL/qtopenglglobal.h \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/QSurfaceFormat \
+		C:/Qt/Qt5.5.0/5.5/mingw492_32/include/QtGui/qsurfaceformat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\snowscenetextures.o scene\snowscene\snowscenetextures.cpp
 
 release/qrc_resources.o: release/qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\qrc_resources.o release\qrc_resources.cpp

@@ -2,7 +2,7 @@
 
 layout(location = 0) in vec3 position; // Position of the vertex
 layout(location = 1) in vec3 normal;   // Normal of the vertex
-layout(location = 4) in vec2 texCoord; // UV texture coordinates
+layout(location = 5) in vec2 texCoord; // UV texture coordinates
 layout(location = 9) in float arrowOffset; // Sideways offset for billboarded normal arrows
 
 out vec4 shadowCoord;
@@ -12,6 +12,7 @@ out vec3 totalSpecular;
 out vec3 totalDiffuse;
 out vec3 totalAmbient;
 out vec3 Position_worldspace;
+out vec2 uv;
 
 // Transformation matrices
 uniform mat4 p;
@@ -40,6 +41,7 @@ uniform bool useArrowOffsets; // True if rendering the arrowhead of a normal for
 
 void main()
 {
+    uv = texCoord;
     vec4 position_cameraSpace = v * m * vec4(position, 1.0);
     vec4 normal_cameraSpace = vec4(normalize(mat3(transpose(inverse(v * m))) * normal), 0);
 

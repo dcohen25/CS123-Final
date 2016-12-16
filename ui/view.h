@@ -5,9 +5,8 @@
 #include <qgl.h>
 #include <QTime>
 #include <QTimer>
-#include "camera/camtranscamera.h"
+#include "camera/camera.h"
 #include "scene/openglscene.h"
-#include "scene/snowscene/snowscene.h"
 
 class View : public QGLWidget
 {
@@ -36,17 +35,8 @@ private:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
-    void initScenes();
-    void initCameras();
-
-    void setScene(OpenGLScene *scene);
-    void setCamera(Camera *camera);
-
-    std::unique_ptr<SnowScene> m_snowScene;
-    std::unique_ptr<CamtransCamera> m_camtransCamera;
-
-    OpenGLScene *m_currentScene;
-    Camera *m_currentCamera;
+    std::unique_ptr<OpenGLScene> m_currentScene;
+    std::unique_ptr<Camera> m_currentCamera;
 
     glm::vec4      m_cameraEye;
     bool           m_isDragging;

@@ -35,7 +35,9 @@ void Circle::tesselate() {
             // get tile normals
             glm::vec4 normal(0.0, 1.0, 0.0, 0.0);
             // create tile of verteces and normals
-            addVertices(m_transform * topVertex, m_transform * normal, m_transform * leftVertex, m_transform * normal, m_transform * rightVertex, m_transform * normal);
+            addVertices(m_transform * topVertex, m_transform * normal, getTextureMap(topVertex));
+            addVertices(m_transform * leftVertex, m_transform * normal, getTextureMap(leftVertex));
+            addVertices(m_transform * rightVertex, m_transform * normal, getTextureMap(rightVertex));
             // if outside center of circletopVertex
             if (i > 0){
                 // get adjacent tile verteces
@@ -43,8 +45,13 @@ void Circle::tesselate() {
                 leftVertex = glm::vec4(r1 * cos((j + 1)  * m_theta), 0, r1 * sin((j + 1)  * m_theta), 1.0);
                 rightVertex = glm::vec4(r2 * cos((j + 1) * m_theta), 0, r2 * sin((j + 1) * m_theta), 1.0);
                 // get adjacent tile normals
-                addVertices(m_transform * topVertex, m_transform * normal, m_transform * leftVertex, m_transform * normal, m_transform * rightVertex, m_transform * normal);
-            }
+                addVertices(m_transform * topVertex, m_transform * normal, getTextureMap(topVertex));
+                addVertices(m_transform * leftVertex, m_transform * normal, getTextureMap(leftVertex));
+                addVertices(m_transform * rightVertex, m_transform * normal, getTextureMap(rightVertex));            }
         }
     }
+}
+
+glm::vec2 Circle::getTextureMap(glm::vec4 intersect){
+    return glm::vec2(intersect.x + .5, -intersect.z + .5);
 }

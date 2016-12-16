@@ -43,6 +43,7 @@ INPUT(
 ./debug\SOIL.o
 ./debug\stb_image_aug.o
 ./debug\test_SOIL.o
+./debug\snowscenetextures.o
 ./debug\qrc_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_view.o

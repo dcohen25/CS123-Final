@@ -11,6 +11,8 @@
 #include "shape/opengl/cylinder.h"
 #include "map"
 #include "scene/boundingbox.h"
+#include "view.h"
+#include "snowscenetextures.h"
 
 class SnowSceneObject
 {
@@ -18,20 +20,16 @@ public:
     SnowSceneObject(glm::vec3 coords, float length, float width, float height);
     ~SnowSceneObject();
 
-    virtual void render(std::unique_ptr<CS123Shader>  &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
+    virtual void renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) = 0;
+    virtual void renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) = 0;
     BoundingBox getBoundingBox();
-
     glm::vec3 getCoords();
 
 protected:
-    std::vector<CS123ScenePrimitive> m_primitives;
-    std::vector<glm::mat4x4> m_transformations;
-
     glm::vec3 m_coords;
     float m_length;
     float m_width;
     float m_height;
-
     BoundingBox m_boundingBox;
 };
 

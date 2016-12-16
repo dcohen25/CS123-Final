@@ -16,6 +16,7 @@ private:
     float m_radius; // radius of Circle
     float m_theta; // theta of Circle
     void tesselate() override;  // tesselate a Circle
+    glm::vec2 getTextureMap(glm::vec4 intersect); // get texture map at intersection
 
 };
 

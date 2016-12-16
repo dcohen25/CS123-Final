@@ -9,4 +9,13 @@
         <file alias="skybox.frag">shaders/skybox/skybox.frag</file>
         <file alias="skybox.vert">shaders/skybox/skybox.vert</file>
     </qresource>
+    <qresource prefix="/images">
+        <file alias="tree-bark.jpg">images/tree/tree-bark.jpg</file>
+        <file alias="tree-top.jpg">images/tree/tree-top.jpg</file>
+        <file alias="snowman-face.jpg">images/snowman/snowman-face.jpg</file>
+        <file alias="test.jpg">images/solid-color-45244-46449-hd-wallpapers.jpg</file>
+        <file alias="blue.jpg">images/blue.jpg</file>
+        <file alias="smile.jpg">images/smile.jpg</file>
+        <file alias="pepsi.jpg">images/pepsi.jpg</file>
+    </qresource>
 </RCC>

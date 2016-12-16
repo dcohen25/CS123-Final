@@ -26,6 +26,7 @@ private:
     void render() override; // render shape
     void renderTop(); // tesselate body
     void renderBottom(); // tesselate bottom cap
+    glm::vec2 getTextureMap(glm::vec4 intersect);
 };
 
 #endif // CYLINDER_H

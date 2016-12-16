@@ -1,15 +1,8 @@
 #ifndef SNOWSCENETILE_H
 #define SNOWSCENETILE_H
 
-#include <glm/glm.hpp>
-#include "snowscenetile.h"
-#include "lib/cs123scenedata.h"
 #include "snowsceneobject.h"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/transform.hpp"
-#include "scene/boundingbox.h"
-
-class View;
+#include "view.h"
 
 class SnowSceneTile
 {
@@ -18,7 +11,8 @@ public:
     SnowSceneTile();
     ~SnowSceneTile();
 
-    virtual void render(View *context, std::unique_ptr<CS123Shader> &shader,  std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
+    void renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
+    void renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes);
 
     const static float tileSize;
     const static int numTrees;
@@ -37,7 +31,7 @@ protected:
     glm::vec3 getRandomPositionOnTile();
 
     glm::vec3 m_coords;
-    std::vector<SnowSceneObject> m_sceneObjects;
+    std::vector<std::shared_ptr<SnowSceneObject>> m_sceneObjects;
     BoundingBox m_boundingBox;
 };
 

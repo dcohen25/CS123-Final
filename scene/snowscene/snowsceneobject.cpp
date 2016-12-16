@@ -20,11 +20,3 @@ SnowSceneObject::~SnowSceneObject(){
 glm::vec3 SnowSceneObject::getCoords(){
     return m_coords;
 }
-
-void SnowSceneObject::render(std::unique_ptr<CS123Shader> &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
-    for (int i = 0; i < m_primitives.size(); i++){
-        shader->setUniform("m", m_transformations[i]);
-        shader->applyMaterial(m_primitives[i].material);
-        shapes[m_primitives[i].type]->draw();
-    }
-}

@@ -24,6 +24,7 @@ private:
     std::unique_ptr<Circle> m_base; // base of Cone
     void render() override; // render shape
     void renderBase(); // render base
+    glm::vec2 getTextureMap(glm::vec4 intersect);
 
 };
 

@@ -2,10 +2,11 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
-
+#include <iostream>
 
 const float Tree::maxDiameter = 1.6f;
 const float Tree::maxHeight = 5.f;
+
 const float Tree::topDiameterProportion = 1.f;
 const float Tree::trunkDiameterProportion = .2f;
 const float Tree::trunkHeightProportion = .3f;
@@ -23,6 +24,53 @@ Tree::Tree(glm::vec3 coords, float diameter, float height):
 
 Tree::~Tree(){
 
+}
+
+
+void Tree::renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    renderShadowSceneTop(textures, shader, context, shapes);
+    renderShadowSceneTrunk(textures, shader, context, shapes);
+}
+
+void Tree::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    renderPhongSceneTop(textures, shader, context, shapes);
+    renderPhongSceneTrunk(textures, shader, context, shapes);
+}
+
+void Tree::renderPhongSceneTop(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    shader->setUniform("m", m_treeTopTransformation);
+    shader->setUniform("useTexture", 1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, textures.getTreeTopTexture());
+    // Set our "renderedTexture" sampler to user Texture Unit 0
+    GLuint texID = glGetUniformLocation(shader->getID(), "tex");
+    glUniform1i(texID, 1);
+    shapes[m_treeTopPrimitive.type]->draw();
+    glBindTexture(GL_TEXTURE_2D, 0);
+    shader->setUniform("useTexture", 0);
+}
+
+void Tree::renderPhongSceneTrunk(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    shader->setUniform("m", m_treeTrunkTransformation);
+    shader->setUniform("useTexture", 1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, textures.getTreeTrunkTexture());
+    // Set our "renderedTexture" sampler to user Texture Unit 0
+    GLuint texID = glGetUniformLocation(shader->getID(), "tex");
+    glUniform1i(texID, 1);
+    shapes[m_treeTrunkPrimitive.type]->draw();
+    glBindTexture(GL_TEXTURE_2D, 0);
+    shader->setUniform("useTexture", 0);
+}
+
+void Tree::renderShadowSceneTop(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    shader->setUniform("m", m_treeTopTransformation);
+    shapes[m_treeTopPrimitive.type]->draw();
+}
+
+void Tree::renderShadowSceneTrunk(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    shader->setUniform("m", m_treeTrunkTransformation);
+    shapes[m_treeTrunkPrimitive.type]->draw();
 }
 
 void Tree::initTree(){
@@ -49,7 +97,7 @@ void Tree::initTreeTopPrimitive(){
     tree.material.cSpecular.r = tree.material.cSpecular.g = tree.material.cSpecular.b = 1;
     tree.material.shininess = 64;
 
-    m_primitives.push_back(tree);
+    m_treeTopPrimitive = tree;
 }
 
 void Tree::initTreeTopTransformation(){
@@ -58,7 +106,7 @@ void Tree::initTreeTopTransformation(){
     treeTransformation = glm::translate(treeTransformation, glm::vec3(0, -m_height / 2 + (m_topHeight * .5) + m_trunkHeight, 0));
     treeTransformation = glm::scale(treeTransformation, glm::vec3(m_topDiameter, m_topHeight, m_topDiameter));
 
-    m_transformations.push_back(treeTransformation);
+    m_treeTopTransformation = treeTransformation;
 }
 
 void Tree::initTreeTrunkPrimitive(){
@@ -70,7 +118,7 @@ void Tree::initTreeTrunkPrimitive(){
     trunk.material.cSpecular.r = trunk.material.cSpecular.g = trunk.material.cSpecular.b = 1;
     trunk.material.shininess = 64;
 
-    m_primitives.push_back(trunk);
+    m_treeTrunkPrimitive = trunk;
 }
 
 void Tree::initTreeTrunkTransformation(){
@@ -79,5 +127,5 @@ void Tree::initTreeTrunkTransformation(){
     trunkTransformation = glm::translate(trunkTransformation, glm::vec3(0, -m_height / 2 + m_trunkHeight * .5, 0));
     trunkTransformation = glm::scale(trunkTransformation, glm::vec3(m_trunkDiameter, m_trunkHeight, m_trunkDiameter));
 
-    m_transformations.push_back(trunkTransformation);
+    m_treeTrunkTransformation = trunkTransformation;
 }

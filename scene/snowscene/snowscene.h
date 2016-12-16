@@ -49,11 +49,11 @@ protected:
     void loadQuadShader();
     void loadShadowShader();
     void loadSkyboxShader();
-    void loadTextureShader();
+
     void setLights();
     void initLights();
     void updateSceneMap();
-    void renderScene(View *context, std::unique_ptr<CS123::GL::CS123Shader> &shader);
+    void renderPhongScene(View *context);
     void renderPhongPass(View *context);
     void renderShadowPass(View *context);
     void renderSkyboxPass(View *context);
@@ -76,14 +76,10 @@ protected:
     GLuint loadCubemap(std::vector<const GLchar*> faces);
     void updateTilesToRender(View *context);
     void loadTexture();
+    void renderShadowScene(View *context);
 
     CS123SceneLightData makeLight(int i);
 
-    std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
-    std::unique_ptr<CS123::GL::CS123Shader> m_quadShader;
-    std::unique_ptr<CS123::GL::CS123Shader> m_shadowShader;
-    std::unique_ptr<CS123::GL::CS123Shader> m_skyboxShader;
-    std::unique_ptr<CS123::GL::CS123Shader> m_textureShader;
     std::vector<CS123SceneLightData> m_lights;
     std::map<int, std::map<int, SnowSceneTile>> m_sceneMap;
     GLuint m_FramebufferName;
@@ -96,6 +92,14 @@ protected:
     glm::mat4 m_depthMVP;
     glm::mat4 m_depthBiasMVP;
     std::vector<SnowSceneTile> m_tilesToRender;
+
+
+    std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
+    std::unique_ptr<CS123::GL::CS123Shader> m_quadShader;
+    std::unique_ptr<CS123::GL::CS123Shader> m_shadowShader;
+    std::unique_ptr<CS123::GL::CS123Shader> m_skyboxShader;
+
+    SnowSceneTextures m_snowSceneTextures;
 };
 
 #endif // SCENEVIEWSCENE_H

@@ -7,6 +7,7 @@ in vec3 totalAmbient;
 in vec3 totalDiffuse;
 in vec3 totalSpecular;
 in vec3 Position_worldspace;
+in vec2 uv;
 
 layout(location = 0) out vec3 fragColor;
 
@@ -42,26 +43,32 @@ float random(vec3 seed, int i){
 
 
 void main(){
-    float bias = 0.010;
-
-    float visibility = 1.0;
-
-    // Sample the shadow map 4 times
-    for (int i=0;i<4;i++){
-            // use either :
-            //  - Always the same samples.
-            //    Gives a fixed pattern in the shadow, but no noise
-            // int index = i;
-            //  - A random sample, based on the pixel's screen location.
-            //    No banding, but the shadow moves with the camera, which looks weird.
-            // int index = int(16.0*random(gl_FragCoord.xyy, i))%16;
-            //  - A random sample, based on the pixel's position in world space.
-            //    The position is rounded to the millimeter to avoid too much aliasing
-            int index = int(16.0*random(floor(Position_worldspace.xyz*1000.0), i))%16;
-
-            // being fully in the shadow will eat up 4*0.2 = 0.8
-            // 0.2 potentially remain, which is quite dark.
-            visibility -= .225*(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
+    if (useTexture == 1){
+        fragColor = .6 * texture(tex, uv).xyz;
     }
-    fragColor = totalAmbient + (visibility * totalDiffuse) + (visibility * totalSpecular);
+    else {
+        float bias = 0.010;
+
+        float visibility = 1.0;
+
+        // Sample the shadow map 4 times
+        for (int i=0;i<4;i++){
+                // use either :
+                //  - Always the same samples.
+                //    Gives a fixed pattern in the shadow, but no noise
+                // int index = i;
+                //  - A random sample, based on the pixel's screen location.
+                //    No banding, but the shadow moves with the camera, which looks weird.
+                // int index = int(16.0*random(gl_FragCoord.xyy, i))%16;
+                //  - A random sample, based on the pixel's position in world space.
+                //    The position is rounded to the millimeter to avoid too much aliasing
+                int index = int(16.0*random(floor(Position_worldspace.xyz*1000.0), i))%16;
+
+                // being fully in the shadow will eat up 4*0.2 = 0.8
+                // 0.2 potentially remain, which is quite dark.
+                visibility -= .225*(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
+        }
+
+        fragColor = totalAmbient + (visibility * totalDiffuse) + (visibility * totalSpecular);
+    }
 }

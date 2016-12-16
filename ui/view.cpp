@@ -4,6 +4,8 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <iostream>
+#include "scene/snowscene/snowscene.h"
+#include "camera/camtranscamera.h"
 
 
 View::View(QWidget *parent) : QGLWidget(ViewFormat(), parent),
@@ -31,11 +33,11 @@ View::~View()
 }
 
 Camera *View::getCamera(){
-    return m_currentCamera;
+    return m_currentCamera.get();
 }
 
 OpenGLScene *View::getScene(){
-    return m_currentScene;
+    return m_currentScene.get();
 }
 
 void View::initializeGL()
@@ -63,26 +65,8 @@ void View::initializeGL()
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    initScenes();
-    initCameras();
-    setCamera(m_camtransCamera.get());
-    setScene(m_snowScene.get());
-}
-
-void View::initScenes() {
-    m_snowScene = std::make_unique<SnowScene>();
-}
-
-void View::initCameras() {
-    m_camtransCamera = std::make_unique<CamtransCamera>();
-}
-
-void View::setScene(OpenGLScene *scene){
-    m_currentScene = scene;
-}
-
-void View::setCamera(Camera *camera){
-    m_currentCamera = camera;
+    m_currentCamera = std::make_unique<CamtransCamera>();
+    m_currentScene = std::make_unique<SnowScene>();
 }
 
 void View::paintGL()

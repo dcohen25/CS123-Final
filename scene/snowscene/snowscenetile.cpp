@@ -1,15 +1,5 @@
 #include "snowscenetile.h"
 
-#include "GL/glew.h"
-#include <QGLWidget>
-#include "ui/view.h"
-#include "lib/resourceloader.h"
-#include "glm.hpp"
-#include "lib/cs123scenedata.h"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtx/transform.hpp"
-#include <iostream>
-#include "glm/gtx/string_cast.hpp"
 #include "scene/utils.h"
 #include "tree.h"
 #include "snowman.h"
@@ -17,9 +7,9 @@
 
 using namespace CS123::GL;
 
-const float SnowSceneTile::tileSize = 50.f;
-const int SnowSceneTile::numTrees = 40;
-const int SnowSceneTile::numSnowmen = 4;
+const float SnowSceneTile::tileSize = 15.f;
+const int SnowSceneTile::numTrees = 5;
+const int SnowSceneTile::numSnowmen = 3;
 
 SnowSceneTile::SnowSceneTile(glm::vec3 coords) :
     m_coords(coords),
@@ -44,8 +34,7 @@ void SnowSceneTile::initScene(){
 }
 
 void SnowSceneTile::initSnow(){
-    Snow snow = Snow(m_coords);
-    m_sceneObjects.push_back(snow);
+    m_sceneObjects.push_back(std::make_shared<Snow>(m_coords));
 }
 
 void SnowSceneTile::initTrees(){
@@ -56,8 +45,7 @@ void SnowSceneTile::initTrees(){
         float height = heightFactor * Tree::maxHeight;
         glm::vec3 coords = getRandomPositionOnTile();
         coords.y += height / 2.f;
-        Tree tree = Tree(coords, diameter, height);
-        m_sceneObjects.push_back(tree);
+        m_sceneObjects.push_back(std::make_shared<Tree>(coords, diameter, height));
     }
 }
 
@@ -68,15 +56,22 @@ void SnowSceneTile::initSnowmen(){
         glm::vec3 coords = getRandomPositionOnTile();
         float height = Snowman::computeSnowmanHeight(diameter);
         coords += height / 2.f;
-        Snowman snowman = Snowman(coords, diameter);
-        m_sceneObjects.push_back(snowman);
+        m_sceneObjects.push_back(std::make_shared<Snowman>(coords, diameter));
     }
 }
 
-void SnowSceneTile::render(View *context, std::unique_ptr<CS123Shader> &shader, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+void SnowSceneTile::renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     for (int i = 0; i < m_sceneObjects.size(); i++){
-        if (context->getCamera()->isVisible(m_sceneObjects[i].getBoundingBox())){
-            m_sceneObjects[i].render(shader, shapes);
+        if (context->getCamera()->isVisible(m_sceneObjects[i]->getBoundingBox())){
+            m_sceneObjects[i]->renderShadowScene(textures, shader, context, shapes);
+        }
+    }
+}
+
+void SnowSceneTile::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
+    for (int i = 0; i < m_sceneObjects.size(); i++){
+        if (context->getCamera()->isVisible(m_sceneObjects[i]->getBoundingBox())){
+            m_sceneObjects[i]->renderPhongScene(textures, shader, context, shapes);
         }
     }
 }

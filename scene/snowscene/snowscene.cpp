@@ -2,19 +2,13 @@
 
 #include "GL/glew.h"
 #include <QGLWidget>
-#include "camera/camera.h"
-#include "ui/view.h"
 #include "lib/resourceloader.h"
 #include "glm.hpp"
-#include "lib/cs123scenedata.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtx/transform.hpp"
-#include "gl/shaders/CS123Shader.h"
-#include <iostream>
-#include "glm/gtx/string_cast.hpp"
 #include "gl/util/FullScreenQuad.h"
 #include "soil/SOIL.h"
-
+#include "view.h"
 using namespace CS123::GL;
 
 const int SnowScene::sceneRadius = 1;
@@ -22,10 +16,11 @@ const int SnowScene::numLights = 1;
 
 SnowScene::SnowScene()
 {
-    loadSkyboxShader();
     loadSkybox();
+    loadSkyboxShader();
     loadPhongShader();
     loadShadowShader();
+    loadQuadShader();
     createRenderTarget();
     initLights();
 }
@@ -163,7 +158,7 @@ void SnowScene::renderShadowPass(View *context){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     m_shadowShader->bind();
     setShadowUniforms(context);
-    renderScene(context, m_shadowShader);
+    renderShadowScene(context);
     m_shadowShader->unbind();
 }
 
@@ -181,7 +176,7 @@ void SnowScene::renderPhongPass(View *context) {
     m_phongShader->bind();
     setPhongUniforms(context);
     setLights();
-    renderScene(context, m_phongShader);
+    renderPhongScene(context);
     m_phongShader->unbind();
 }
 
@@ -206,7 +201,7 @@ void SnowScene::setQuadUniforms(View *context){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_depthTexture);
     // Set our "renderedTexture" sampler to user Texture Unit 0
-    GLuint texID = glGetUniformLocation(m_quadShader->getID(), "renderedTexture");
+    GLuint texID = glGetUniformLocation(SnowScene::m_quadShader->getID(), "renderedTexture");
     glUniform1i(texID, 0);
 }
 
@@ -252,12 +247,12 @@ void SnowScene::updateDepthMVP(View *context){
     );
     glm::vec3 currentPosition = glm::vec3(context->getCamera()->getEye());
     // Compute the MVP matrix from the light's point of view
-    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-SnowSceneTile::tileSize,
-                                                        SnowSceneTile::tileSize,
-                                                        -SnowSceneTile::tileSize,
-                                                        SnowSceneTile::tileSize,
-                                                        -SnowSceneTile::tileSize,
-                                                        SnowSceneTile::tileSize + 20);
+    glm::mat4 depthProjectionMatrix = glm::ortho<float>(-SnowSceneTile::tileSize * SnowScene::sceneRadius * 2,
+                                                        SnowSceneTile::tileSize * SnowScene::sceneRadius * 2,
+                                                        -SnowSceneTile::tileSize * SnowScene::sceneRadius * 2,
+                                                        SnowSceneTile::tileSize * SnowScene::sceneRadius * 2,
+                                                        -SnowSceneTile::tileSize * SnowScene::sceneRadius * 2,
+                                                        SnowSceneTile::tileSize * SnowScene::sceneRadius * 2 + 20);
     glm::mat4 depthViewMatrix = glm::lookAt(glm::vec3(currentPosition.x, currentPosition.y + 2, currentPosition.z - 6),
                                             currentPosition, glm::vec3(0,1,0));
     glm::mat4 depthModelMatrix = glm::mat4(1.0);
@@ -270,10 +265,10 @@ void SnowScene::updateDepthMVP(View *context){
 
 void SnowScene::setPhongUniforms(View *context) {
     m_phongShader->setUniform("depthBiasMVP", m_depthBiasMVP);
-    glActiveTexture(GL_TEXTURE1);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_depthTexture);
     GLuint texID = glGetUniformLocation(m_phongShader->getID(), "shadowMap");
-    glUniform1i(texID, 1);
+    glUniform1i(texID, 0);
 
 
     Camera *camera = context->getCamera();
@@ -281,7 +276,7 @@ void SnowScene::setPhongUniforms(View *context) {
     m_phongShader->setUniform("useArrowOffsets", false);
     m_phongShader->setUniform("p" , camera->getProjectionMatrix());
     m_phongShader->setUniform("v", camera->getViewMatrix());
-//    m_phongShader->setUniform("allBlack", glm::vec3(1.0f, 1.0f, 1.0f));
+    m_phongShader->setUniform("allBlack", glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
 void SnowScene::setLights()
@@ -334,11 +329,18 @@ void SnowScene::updateSceneMap(){
     }
 }
 
-void SnowScene::renderScene(View *context, std::unique_ptr<CS123::GL::CS123Shader> &shader){
+void SnowScene::renderShadowScene(View *context){
    for (int i = 0; i < m_tilesToRender.size(); i++){
-       m_tilesToRender[i].render(context, shader, m_shapes);
+       m_tilesToRender[i].renderShadowScene(m_snowSceneTextures, m_shadowShader, context, m_shapes);
    }
 }
+
+void SnowScene::renderPhongScene(View *context){
+   for (int i = 0; i < m_tilesToRender.size(); i++){
+       m_tilesToRender[i].renderPhongScene(m_snowSceneTextures, m_phongShader, context, m_shapes);
+   }
+}
+
 
 void SnowScene::renderSkyboxPass(View *context){
            // Clear buffers

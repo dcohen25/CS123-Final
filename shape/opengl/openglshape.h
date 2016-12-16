@@ -2,7 +2,6 @@
 #define OPENGLSHAPE_H
 
 #include "GL/glew.h"
-#include "shape/shape.h"
 #include <memory>
 #include <vector>
 #include <GL/glew.h>
@@ -30,7 +29,7 @@ public:
 protected:
     std::vector<GLfloat> m_vertices; // vertices
     virtual void render(); // render shape
-    void addVertices(glm::vec4 topVertex, glm::vec4 topNormal, glm::vec4 leftVertex, glm::vec4 leftNormal, glm::vec4 rightVertex, glm::vec4 rightNormal); // add a tile
+    void addVertices(glm::vec4 topVertex, glm::vec4 topNormal, glm::vec2 uv);
     virtual void tesselate() = 0; // Tesselate a shape
 
 private:

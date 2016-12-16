@@ -99,6 +99,3 @@ void Cube::renderBottom(){
     transform = glm::rotate(transform, static_cast<float>(M_PI), glm::vec3(1, 0, 0));
     m_bottom = std::make_unique<Square>(m_size, m_tess, transform);
 }
-
-
-

@@ -43,6 +43,7 @@ INPUT(
 ./release\SOIL.o
 ./release\stb_image_aug.o
 ./release\test_SOIL.o
+./release\snowscenetextures.o
 ./release\qrc_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_view.o

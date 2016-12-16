@@ -34,14 +34,22 @@ void Square::tesselate() {
             // get normal
             glm::vec4 normal(0.0, 1.0, 0.0, 0.0);
             // create tile of verteces and normals
-            addVertices(m_transform * topVertex, m_transform * normal, m_transform * leftVertex, m_transform * normal, m_transform * rightVertex, m_transform * normal);
-
+            addVertices(m_transform * topVertex, m_transform * normal, getTextureMap(topVertex));
+            addVertices(m_transform * leftVertex, m_transform * normal, getTextureMap(leftVertex));
+            addVertices(m_transform * rightVertex, m_transform * normal, getTextureMap(rightVertex));
             // get adjacent tile verteces
             topVertex = glm::vec4(x2, 0, z1, 1.0);
             leftVertex = glm::vec4(x1, 0, z2, 1.0);
             rightVertex = glm::vec4(x2, 0, z2, 1.0);
             // create tile of verteces and normals
-            addVertices(m_transform * topVertex, m_transform * normal, m_transform * leftVertex, m_transform * normal, m_transform * rightVertex, m_transform * normal);
-        }
+            addVertices(m_transform * topVertex, m_transform * normal, getTextureMap(topVertex));
+            addVertices(m_transform * leftVertex, m_transform * normal, getTextureMap(leftVertex));
+            addVertices(m_transform * rightVertex, m_transform * normal, getTextureMap(rightVertex));        }
     }
+}
+
+glm::vec2 Square::getTextureMap(glm::vec4 intersect){
+    glm::vec2 uvCoords;
+    uvCoords = glm::vec2(intersect.x + .5, intersect.z + .5);
+    return uvCoords;
 }

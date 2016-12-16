@@ -74,7 +74,9 @@ void Cylinder::tesselate(){
             glm::vec4 leftNormal(getNormal(-j * m_theta));
             glm::vec4 rightNormal(getNormal(-(j + 1) * m_theta));
             // create tile of verteces and normals
-            addVertices(m_transform * topVertex, m_transform * topNormal, m_transform * leftVertex, m_transform * leftNormal, m_transform * rightVertex, m_transform * rightNormal);
+            addVertices(m_transform * topVertex, m_transform * topNormal, getTextureMap(topVertex));
+            addVertices(m_transform * leftVertex, m_transform * leftNormal, getTextureMap(leftVertex));
+            addVertices(m_transform * rightVertex, m_transform * rightNormal, getTextureMap(rightVertex));
             // get adjacent tile verteces
             topVertex = glm::vec4(r * cos(-(j + 1) * m_theta), y1, r * sin(-(j + 1) * m_theta), 1.0);
             leftVertex = glm::vec4(r * cos(-j * m_theta), y2, r * sin(-j * m_theta), 1.0);
@@ -84,9 +86,24 @@ void Cylinder::tesselate(){
             leftNormal = glm::vec4(getNormal(-j * m_theta));
             rightNormal = glm::vec4(getNormal(-(j + 1) * m_theta));
             // create tile of verteces and normals
-            addVertices(m_transform * topVertex, m_transform * topNormal, m_transform * leftVertex, m_transform * leftNormal, m_transform * rightVertex, m_transform * rightNormal);
+            addVertices(m_transform * topVertex, m_transform * topNormal, getTextureMap(topVertex));
+            addVertices(m_transform * leftVertex, m_transform * leftNormal, getTextureMap(leftVertex));
+            addVertices(m_transform * rightVertex, m_transform * rightNormal, getTextureMap(rightVertex));
         }
     }
+}
+
+glm::vec2 Cylinder::getTextureMap(glm::vec4 intersect){
+    glm::vec2 coords;
+    coords.y = -intersect.y + .5;
+    float angle = atan2(intersect.z, intersect.x);
+    if (angle < 0){
+        coords.x = -angle / (2.0 * M_PI);
+    }
+    else {
+        coords.x = 1 - (angle / (2.0 * M_PI));
+    }
+    return coords;
 }
 
 glm::vec4 Cylinder::getNormal(float angle){
