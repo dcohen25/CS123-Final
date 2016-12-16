@@ -31,6 +31,12 @@ protected:
     virtual void render(); // render shape
     void addVertices(glm::vec4 topVertex, glm::vec4 topNormal, glm::vec2 uv);
     virtual void tesselate() = 0; // Tesselate a shape
+    void setVertexData(GLfloat *data, int size, VBO::GEOMETRY_LAYOUT drawMode, int numVertices);
+    /** Enables the specified attribute and calls glVertexAttribPointer with the given arguments. */
+    void setAttribute(GLuint index, GLuint numElementsPerVertex, int offset, VBOAttribMarker::DATA_TYPE type,
+                      bool normalize);
+    /** Build the VAO given the specified vertex data and atrributes */
+    void buildVAO();
 
 private:
     GLfloat *m_data;                            /// vector of floats containing the vertex data.
@@ -40,12 +46,6 @@ private:
     std::vector<VBOAttribMarker> m_markers;     /// list of VBOAttribMarkers that describe how the data is laid out.
     std::unique_ptr<CS123::GL::VAO> m_VAO;      /// a wrapper for the vertex array object (VAO)
     /** Initialize the VBO with the given vertex data. */
-    void setVertexData(GLfloat *data, int size, VBO::GEOMETRY_LAYOUT drawMode, int numVertices);
-    /** Enables the specified attribute and calls glVertexAttribPointer with the given arguments. */
-    void setAttribute(GLuint index, GLuint numElementsPerVertex, int offset, VBOAttribMarker::DATA_TYPE type,
-                      bool normalize);
-    /** Build the VAO given the specified vertex data and atrributes */
-    void buildVAO();
 
 };
 

@@ -33,14 +33,14 @@ void Snow::initSnow(){
 
 void Snow::initSnowPrimitive(){
     CS123ScenePrimitive snow;
-    snow.type = PrimitiveType::PRIMITIVE_CUBE;
+    snow.type = PrimitiveType::PRIMITIVE_TERRAIN;
     snow.material.clear();
-    snow.material.cAmbient.r = .4;
-    snow.material.cAmbient.g = .4f;
-    snow.material.cAmbient.b = .4f;
-    snow.material.cDiffuse.r = 1.f;
-    snow.material.cDiffuse.g = 1.f;
-    snow.material.cDiffuse.b = 1.f;
+    snow.material.cAmbient.r = .3f;
+    snow.material.cAmbient.g = .3f;
+    snow.material.cAmbient.b = .3f;
+    snow.material.cDiffuse.r = .3f;
+    snow.material.cDiffuse.g = .3f;
+    snow.material.cDiffuse.b = .3f;
     snow.material.cSpecular.r = snow.material.cSpecular.g = snow.material.cSpecular.b = 0;
     snow.material.shininess = 0;
 
@@ -49,8 +49,7 @@ void Snow::initSnowPrimitive(){
 
 void Snow::initSnowTransformation(){
     glm::mat4x4 snowTransformation;
-    snowTransformation = glm::translate(snowTransformation, glm::vec3(m_coords.x, m_coords.y - SnowSceneTile::tileSize / 2, m_coords.z));
-    snowTransformation = glm::scale(snowTransformation, glm::vec3(SnowSceneTile::tileSize, SnowSceneTile::tileSize, SnowSceneTile::tileSize));
+    snowTransformation = glm::translate(snowTransformation, glm::vec3(m_coords.x, m_coords.y, m_coords.z));
 
     m_snowTransformation = snowTransformation;
 }

@@ -63,6 +63,7 @@ void Snowman::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123
 void Snowman::renderPhongTop(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     // TODO (Task 6): Initialize texture map.
     shader->setUniform("m", m_topTransformation);
+    shader->applyMaterial(m_topPrimitive.material);
     shader->setUniform("useTexture", 1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, textures.getSnowmanTopTexture());
@@ -197,13 +198,13 @@ void Snowman::initSnowmanNosePrimitive(){
     CS123ScenePrimitive nose;
     nose.type = PrimitiveType::PRIMITIVE_CONE;
     nose.material.clear();
-    nose.material.cAmbient.r = 1.f;
-    nose.material.cAmbient.g = .4f;
-    nose.material.cAmbient.b = .4f;
-    nose.material.cDiffuse.r = 1.f;
-    nose.material.cDiffuse.g = .4f;
-    nose.material.cDiffuse.b = .4f;
-    nose.material.cSpecular.r = nose.material.cSpecular.g = nose.material.cSpecular.b = 1;
+    nose.material.cAmbient.r = .6f;
+    nose.material.cAmbient.g = .2f;
+    nose.material.cAmbient.b = .2f;
+    nose.material.cDiffuse.r = .6f;
+    nose.material.cDiffuse.g = .2f;
+    nose.material.cDiffuse.b = .2f;
+    nose.material.cSpecular.r = nose.material.cSpecular.g = nose.material.cSpecular.b = .8;
     nose.material.shininess = 40;
 
     m_nosePrimitive = nose;
@@ -304,12 +305,12 @@ CS123ScenePrimitive Snowman::makeSnowSphere(){
     CS123ScenePrimitive snowSphere;
     snowSphere.type = PrimitiveType::PRIMITIVE_SPHERE;
     snowSphere.material.clear();
-    snowSphere.material.cAmbient.r = .5f;
-    snowSphere.material.cAmbient.g = .5f;
-    snowSphere.material.cAmbient.b = .5f;
-    snowSphere.material.cDiffuse.r = 1.f;
-    snowSphere.material.cDiffuse.g = 1.f;
-    snowSphere.material.cDiffuse.b = 1.f;
+    snowSphere.material.cAmbient.r = .3f;
+    snowSphere.material.cAmbient.g = .3f;
+    snowSphere.material.cAmbient.b = .3f;
+    snowSphere.material.cDiffuse.r = .3f;
+    snowSphere.material.cDiffuse.g = .3f;
+    snowSphere.material.cDiffuse.b = .3f;
     snowSphere.material.cSpecular.r = snowSphere.material.cSpecular.g = snowSphere.material.cSpecular.b = 1;
     snowSphere.material.shininess = 64;
 

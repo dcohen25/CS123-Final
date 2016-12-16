@@ -39,6 +39,7 @@ void Tree::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Sha
 
 void Tree::renderPhongSceneTop(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     shader->setUniform("m", m_treeTopTransformation);
+    shader->applyMaterial(m_treeTopPrimitive.material);
     shader->setUniform("useTexture", 1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, textures.getTreeTopTexture());
@@ -52,6 +53,7 @@ void Tree::renderPhongSceneTop(SnowSceneTextures textures, std::unique_ptr<CS123
 
 void Tree::renderPhongSceneTrunk(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     shader->setUniform("m", m_treeTrunkTransformation);
+    shader->applyMaterial(m_treeTrunkPrimitive.material);
     shader->setUniform("useTexture", 1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, textures.getTreeTrunkTexture());
@@ -92,9 +94,9 @@ void Tree::initTreeTopPrimitive(){
     CS123ScenePrimitive tree;
     tree.type = PrimitiveType::PRIMITIVE_CONE;
     tree.material.clear();
-    tree.material.cAmbient.g = .2f;
-    tree.material.cDiffuse.g = .5f;
-    tree.material.cSpecular.r = tree.material.cSpecular.g = tree.material.cSpecular.b = 1;
+    tree.material.cAmbient.g = .1f;
+    tree.material.cDiffuse.g = .1f;
+    tree.material.cSpecular.r = tree.material.cSpecular.g = tree.material.cSpecular.b = .8;
     tree.material.shininess = 64;
 
     m_treeTopPrimitive = tree;
@@ -113,9 +115,9 @@ void Tree::initTreeTrunkPrimitive(){
     CS123ScenePrimitive trunk;
     trunk.type = PrimitiveType::PRIMITIVE_CYLINDER;
     trunk.material.clear();
-    trunk.material.cAmbient = glm::vec4(.3f, .2f, .1f, 0);
-    trunk.material.cDiffuse = glm::vec4(.3f, .2f, .1f, 0);
-    trunk.material.cSpecular.r = trunk.material.cSpecular.g = trunk.material.cSpecular.b = 1;
+    trunk.material.cAmbient = glm::vec4(.2f, .1f, .0f, 0);
+    trunk.material.cDiffuse = glm::vec4(.2f, .1f, .0f, 0);
+    trunk.material.cSpecular.r = trunk.material.cSpecular.g = trunk.material.cSpecular.b = .8;
     trunk.material.shininess = 64;
 
     m_treeTrunkPrimitive = trunk;

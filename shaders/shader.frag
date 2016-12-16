@@ -44,7 +44,7 @@ float random(vec3 seed, int i){
 
 void main(){
     if (useTexture == 1){
-        fragColor = .6 * texture(tex, uv).xyz;
+        fragColor = (.3 * texture(tex, uv).xyz + .7 * totalDiffuse) + totalSpecular;
     }
     else {
         float bias = 0.010;
@@ -66,9 +66,8 @@ void main(){
 
                 // being fully in the shadow will eat up 4*0.2 = 0.8
                 // 0.2 potentially remain, which is quite dark.
-                visibility -= .225*(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
+                visibility -= .225 *(1.0-texture( shadowMap, vec3(shadowCoord.xy + poissonDisk[index]/700.0,  (shadowCoord.z-bias)/shadowCoord.w) ));
         }
-
         fragColor = totalAmbient + (visibility * totalDiffuse) + (visibility * totalSpecular);
     }
 }
