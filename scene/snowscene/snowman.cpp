@@ -8,8 +8,8 @@ const float Snowman::maxDiameter = .6f;
 const float Snowman::m_diameterBottomProportion = 1;
 const float Snowman::m_diameterMiddleProportion = .8f;
 const float Snowman::m_diameterTopProportion = .6f;
-const float Snowman::m_diameterHatBaseProportion = .4f;
-const float Snowman::m_diameterHatTopProportion = .2f;
+const float Snowman::m_diameterHatBaseProportion = .7f;
+const float Snowman::m_diameterHatTopProportion = .4f;
 const float Snowman::m_diameterNoseProportion = .1f;
 const float Snowman::m_heightHatBaseProportion = .01f;
 const float Snowman::m_heightHatTopProportion = .4f;
@@ -213,7 +213,7 @@ void Snowman::initSnowmanNosePrimitive(){
 void Snowman::initSnowmanNoseTransformation(){
     glm::mat4x4 transformation;
     transformation = glm::translate(transformation, m_coords);
-    transformation = glm::translate(transformation, glm::vec3(-m_diameterTop / 2 - m_heightNose / 2, -m_height / 2 + m_diameterBottom + m_diameterMiddle + m_diameterTop / 2, 0));
+    transformation = glm::translate(transformation, glm::vec3(-m_diameterTop / 2 - m_heightNose / 2 + .005, -m_height / 2 + m_diameterBottom + m_diameterMiddle + m_diameterTop / 2, 0));
     transformation = glm::rotate(transformation, (float)M_PI / 2.f, glm::vec3(0, 0, 1));
     transformation = glm::scale(transformation, glm::vec3(m_diameterNose, m_heightNose, m_diameterNose));
 
@@ -296,7 +296,7 @@ void Snowman::initSnowmanHatBaseTransformation(){
     glm::mat4x4 transformation;
     transformation = glm::translate(transformation, m_coords);
     transformation = glm::translate(transformation, glm::vec3(0, -m_height / 2 + m_diameterBottom + m_diameterMiddle + m_diameterTop + m_heightHatBase / 2, 0));
-    transformation = glm::scale(transformation, glm::vec3(m_diameterHatBase * 2, m_heightHatBase, m_diameterHatBase));
+    transformation = glm::scale(transformation, glm::vec3(m_diameterHatBase, m_heightHatBase, m_diameterHatBase));
 
     m_hatBaseTransformation = transformation;
 }

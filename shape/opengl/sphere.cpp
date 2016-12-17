@@ -1,6 +1,8 @@
 #include "sphere.h"
 
 #include <glm/glm.hpp>
+#include <iostream>
+#include <glm/gtx/string_cast.hpp>
 
 // construct a sphere
 Sphere::Sphere(float radius, int xTess, int yTess, glm::mat4x4 transform) :
@@ -85,12 +87,15 @@ glm::vec2 Sphere::getTextureMap(glm::vec4 intersect){
         coords.x = .5;
     }
     else {
-        float theta = atan2(intersect.z, intersect.x);
-        if (theta < 0){
-            coords.x = -theta / (2.0 * M_PI);
+        float angle = atan2(intersect.z, intersect.x);
+        if (angle < 0 && angle > -.00001){
+            coords.x = 1;
+        }
+        else if (angle <= 0){
+            coords.x = -angle / (2.0 * M_PI);
         }
         else {
-            coords.x = (theta / (2.0 * M_PI));
+            coords.x = (angle / (2.0 * M_PI));
         }
     }
     return coords;

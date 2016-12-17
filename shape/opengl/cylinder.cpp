@@ -97,7 +97,10 @@ glm::vec2 Cylinder::getTextureMap(glm::vec4 intersect){
     glm::vec2 coords;
     coords.y = -intersect.y + .5;
     float angle = atan2(intersect.z, intersect.x);
-    if (angle < 0){
+    if (angle < 0 && angle > -.00001){
+        coords.x = 1;
+    }
+    else if (angle <= 0){
         coords.x = -angle / (2.0 * M_PI);
     }
     else {
