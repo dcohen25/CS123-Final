@@ -43,6 +43,9 @@ public:
     const static int sceneRadius;
     const static int numLights;
 
+    const static int screenWidth;
+    const static int screenHeight;
+
 protected:
 
     void loadPhongShader();

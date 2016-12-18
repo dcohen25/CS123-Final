@@ -8,6 +8,10 @@
         <file alias="shadow.vert">shaders/shadow/shadow.vert</file>
         <file alias="skybox.frag">shaders/skybox/skybox.frag</file>
         <file alias="skybox.vert">shaders/skybox/skybox.vert</file>
+        <file>shaders/particles/particles_draw.frag</file>
+        <file>shaders/particles/particles_draw.vert</file>
+        <file>shaders/particles/particles_update.frag</file>
+        <file>shaders/particles/quad.vert</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="tree-bark.jpg">images/tree/tree-bark.jpg</file>

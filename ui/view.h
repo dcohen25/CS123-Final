@@ -8,6 +8,8 @@
 #include "camera/camera.h"
 #include "scene/openglscene.h"
 
+#include "gl/datatype/FBO.h"
+
 class View : public QGLWidget
 {
     Q_OBJECT
@@ -43,6 +45,25 @@ private:
 
     float m_lastTime;
     int m_nbFrames;
+
+    // particles
+    void drawParticles();
+    void setParticleViewport();
+
+    int m_width;
+    int m_height;
+
+    GLuint m_particleUpdateProgram;
+    GLuint m_particleDrawProgram;
+
+    std::unique_ptr<OpenGLShape> m_quad;
+
+    GLuint m_particlesVAO;
+    std::shared_ptr<FBO> m_particlesFBO1;
+    std::shared_ptr<FBO> m_particlesFBO2;
+    bool m_firstPass;
+    bool m_evenPass;
+    int m_numParticles;
 
 private slots:
     void tick();

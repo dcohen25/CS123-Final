@@ -178,4 +178,5 @@ DISTFILES += \
     shaders/shadow/shadow.vert \
     shaders/skybox/skybox.frag \
     shaders/skybox/skybox.vert \
-    shaders/texture/texture.frag
+    shaders/texture/texture.frag \
+    skybox/front1.png
