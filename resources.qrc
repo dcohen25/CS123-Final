@@ -21,5 +21,6 @@
         <file alias="blue.jpg">images/blue.jpg</file>
         <file alias="smile.jpg">images/smile.jpg</file>
         <file alias="pepsi.jpg">images/pepsi.jpg</file>
+        <file>images/tree/christmas_texture2674.jpg</file>
     </qresource>
 </RCC>

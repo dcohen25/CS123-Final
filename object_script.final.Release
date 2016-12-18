@@ -45,6 +45,7 @@ INPUT(
 ./release\test_SOIL.o
 ./release\snowscenetextures.o
 ./release\terrain.o
+./release\ornament.o
 ./release\qrc_resources.o
 ./release\moc_mainwindow.o
 ./release\moc_view.o

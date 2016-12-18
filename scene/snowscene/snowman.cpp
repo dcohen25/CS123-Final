@@ -17,8 +17,8 @@ const float Snowman::m_heightNoseProportion = .4f;
 
 //Texture2D Snowman::m_snowmanTopTexture = Snowman::loadTopTexture();
 
-Snowman::Snowman(glm::vec3 coords, float diameter) :
-    SnowSceneObject(coords, diameter, diameter, computeSnowmanHeight(diameter)),
+Snowman::Snowman(glm::vec3 coords, float diameter, float speed, glm::vec3 direction) :
+    SnowSceneObject(coords, diameter, diameter, computeSnowmanHeight(diameter), speed, direction),
     m_diameterBottom(diameter * Snowman::m_diameterBottomProportion),
     m_diameterMiddle(diameter * Snowman::m_diameterMiddleProportion),
     m_diameterTop(diameter * Snowman::m_diameterTopProportion),
@@ -29,7 +29,7 @@ Snowman::Snowman(glm::vec3 coords, float diameter) :
     m_heightHatTop(diameter * Snowman::m_heightHatTopProportion),
     m_heightNose(diameter * Snowman::m_heightNoseProportion)
 {
-    initSnowman();
+    makeObject();
 }
 
 Snowman::~Snowman(){
@@ -146,7 +146,7 @@ void Snowman::renderShadowHatBase(SnowSceneTextures textures, std::unique_ptr<CS
     shapes[m_hatBasePrimitive.type]->draw();
 }
 
-void Snowman::initSnowman(){
+void Snowman::makeObject(){
     initSnowmanBottom();
     initSnowmanMiddle();
     initSnowmanTop();

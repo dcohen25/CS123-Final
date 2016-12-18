@@ -91,7 +91,7 @@ void main() {
                     min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
 
     // Calculate color based on particleID
-    color = vec3(.8, .8, .8);
+    color = vec3(.7, .7, .7);
 
     // the offset to the points of the triangle
     vec4 triPos = diameter * TRI_VERTS[triID];

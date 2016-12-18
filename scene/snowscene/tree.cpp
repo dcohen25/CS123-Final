@@ -13,19 +13,18 @@ const float Tree::trunkHeightProportion = .3f;
 const float Tree::topHeightProportion = .7f;
 
 Tree::Tree(glm::vec3 coords, float diameter, float height):
-    SnowSceneObject(coords, diameter, diameter, height),
+    SnowSceneObject(coords, diameter, diameter, height, 0.f, glm::vec3(0)),
     m_topDiameter(Tree::topDiameterProportion * diameter),
     m_trunkDiameter(Tree::trunkDiameterProportion * diameter),
     m_trunkHeight(Tree::trunkHeightProportion * height),
     m_topHeight(Tree::topHeightProportion * height)
 {
-    initTree();
+    makeObject();
 }
 
 Tree::~Tree(){
 
 }
-
 
 void Tree::renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes){
     renderShadowSceneTop(textures, shader, context, shapes);
@@ -75,7 +74,7 @@ void Tree::renderShadowSceneTrunk(SnowSceneTextures textures, std::unique_ptr<CS
     shapes[m_treeTrunkPrimitive.type]->draw();
 }
 
-void Tree::initTree(){
+void Tree::makeObject(){
     initTreeTop();
     initTreeTrunk();
 }

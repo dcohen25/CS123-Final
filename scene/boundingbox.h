@@ -19,6 +19,13 @@ public:
     glm::vec3 getBottomFaceTopLeft();
     glm::vec3 getBottomFaceTopRight();
 
+    float getMinX();
+    float getMaxX();
+    float getMinY();
+    float getMaxY();
+    float getMinZ();
+    float getMaxZ();
+
     bool isIntersection(BoundingBox o);
 
 private:
@@ -35,6 +42,13 @@ private:
     glm::vec3 m_bottomFaceBottomRight;
     glm::vec3 m_bottomFaceTopLeft;
     glm::vec3 m_bottomFaceTopRight;
+
+    float m_minX;
+    float m_maxX;
+    float m_minY;
+    float m_maxY;
+    float m_minZ;
+    float m_maxZ;
 };
 
 #endif // BOUNDINGBOX_H

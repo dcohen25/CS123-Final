@@ -1,10 +1,18 @@
 #include "boundingbox.h"
 
+#include <iostream>
+
 BoundingBox::BoundingBox(glm::vec3 center, float length, float width, float height) :
     m_center(center),
     m_length(length),
     m_width(width),
     m_height(height),
+    m_minX(m_center.x - width),
+    m_maxX(m_center.x + width),
+    m_minY(m_center.y - height),
+    m_maxY(m_center.y + height),
+    m_minZ(m_center.z - length),
+    m_maxZ(m_center.z + length),
     m_topFaceBottomLeft(m_center.x - m_width / 2, m_center.y + m_height / 2, m_center.z + m_length / 2),
     m_topFaceBottomRight(m_center.x + m_width / 2, m_center.y + m_height / 2, m_center.z + m_length / 2),
     m_topFaceTopLeft(m_center.x - m_width / 2, m_center.y + m_height / 2, m_center.z - m_length / 2),
@@ -22,6 +30,30 @@ BoundingBox::BoundingBox(){
 
 BoundingBox::~BoundingBox(){
 
+}
+
+float BoundingBox::getMinX(){
+    return m_minX;
+}
+
+float BoundingBox::getMinY(){
+    return m_minY;
+}
+
+float BoundingBox::getMinZ(){
+    return m_minZ;
+}
+
+float BoundingBox::getMaxX(){
+    return m_maxX;
+}
+
+float BoundingBox::getMaxY(){
+    return m_maxY;
+}
+
+float BoundingBox::getMaxZ(){
+    return m_maxZ;
 }
 
 glm::vec3 BoundingBox::getTopFaceBottomLeft(){
@@ -57,7 +89,7 @@ glm::vec3 BoundingBox::getBottomFaceTopRight(){
 }
 
 bool BoundingBox::isIntersection(BoundingBox o){
-    return (m_topFaceTopRight.x > o.getTopFaceTopLeft().x && m_topFaceTopLeft.x < o.getTopFaceTopRight().x) &&
-            (m_topFaceTopRight.y > o.getBottomFaceTopRight().y && m_bottomFaceTopRight.y < o.getTopFaceTopRight().y) &&
-            (m_topFaceTopRight.z > o.getTopFaceBottomRight().z && m_topFaceBottomRight.z < o.getTopFaceTopRight().z);
+    return (m_minX <= o.getMaxX() && m_maxX >= o.getMinX()) &&
+         (m_minY <= o.getMaxY() && m_maxY >= o.getMinY()) &&
+         (m_minZ <= o.getMaxZ() && m_maxZ >= o.getMinZ());
 }

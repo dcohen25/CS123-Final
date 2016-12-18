@@ -66,7 +66,8 @@ SOURCES += ui/mainwindow.cpp \
     soil/stb_image_aug.c \
     soil/test_SOIL.cpp \
     scene/snowscene/snowscenetextures.cpp \
-    shape/opengl/terrain.cpp
+    shape/opengl/terrain.cpp \
+    scene/snowscene/ornament.cpp
 
 HEADERS += ui/mainwindow.h \
     ui_mainwindow.h \
@@ -117,7 +118,8 @@ HEADERS += ui/mainwindow.h \
     soil/stbi_DDS_aug.h \
     soil/stbi_DDS_aug_c.h \
     scene/snowscene/snowscenetextures.h \
-    shape/opengl/terrain.h
+    shape/opengl/terrain.h \
+    scene/snowscene/ornament.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include

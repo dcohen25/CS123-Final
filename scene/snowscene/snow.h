@@ -11,8 +11,9 @@ public:
 
     virtual void renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape> > &shapes) override;
     virtual void renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape> > &shapes) override;
+
+    virtual void makeObject() override;
 protected:
-    void initSnow();
     void initSnowPrimitive();
     void initSnowTransformation();
 

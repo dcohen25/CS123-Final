@@ -4,12 +4,14 @@
 #include "tree.h"
 #include "snowman.h"
 #include "snow.h"
+#include "ornament.h"
 
 using namespace CS123::GL;
 
 const float SnowSceneTile::tileSize = 15.f;
 const int SnowSceneTile::numTrees = 5;
 const int SnowSceneTile::numSnowmen = 3;
+const int SnowSceneTile::numOrnaments = 4;
 
 SnowSceneTile::SnowSceneTile(glm::vec3 coords) :
     m_coords(coords),
@@ -26,11 +28,40 @@ SnowSceneTile::~SnowSceneTile()
 {
 }
 
+void SnowSceneTile::updateSceneObjects(){
+    for (int i = 1; i < m_sceneObjects.size(); i++){
+        glm::vec3 newPosition = m_sceneObjects[i]->getNewPosition();
+        BoundingBox box(newPosition, m_sceneObjects[i]->getLength(), m_sceneObjects[i]->getWidth(), m_sceneObjects[i]->getHeight());
+        bool isCollision = false;
+        for (int j = 1; j < m_sceneObjects.size(); j++){
+            if (i != j){
+                if (box.isIntersection(m_sceneObjects[j]->getBoundingBox())){
+                    isCollision = true;
+                    break;
+                }
+            }
+        }
+        if (box.getMaxX() > m_coords.x + SnowSceneTile::tileSize / 2.f ||
+                box.getMinX() < m_coords.x - SnowSceneTile::tileSize / 2.f ||
+                box.getMinZ() < m_coords.z - SnowSceneTile::tileSize / 2.f ||
+                box.getMaxZ() > m_coords.z + SnowSceneTile::tileSize / 2.f){
+            isCollision = true;
+        }
+        if (isCollision){
+            m_sceneObjects[i]->setDirection(-m_sceneObjects[i]->getDirection());
+        }
+        else {
+            m_sceneObjects[i]->setPosition(newPosition);
+        }
+    }
+}
+
 // Initialize Scene
 void SnowSceneTile::initScene(){
+    initSnow();
     initTrees();
     initSnowmen();
-    initSnow();
+    initOrnaments();
 }
 
 void SnowSceneTile::initSnow(){
@@ -49,6 +80,13 @@ void SnowSceneTile::initTrees(){
     }
 }
 
+void SnowSceneTile::initOrnaments(){
+    for (int i = 0; i < SnowSceneTile::numOrnaments; i++){
+        glm::vec3 coords = getRandomPositionOnTile();
+        m_sceneObjects.push_back(std::make_shared<Ornament>(coords));
+    }
+}
+
 void SnowSceneTile::initSnowmen(){
     for (int i = 0; i < SnowSceneTile::numSnowmen; i++){
         float diameterFactor = glm::clamp(Utils::getRandomValue(), .5f, 1.f);
@@ -56,7 +94,9 @@ void SnowSceneTile::initSnowmen(){
         glm::vec3 coords = getRandomPositionOnTile();
         float height = Snowman::computeSnowmanHeight(diameter);
         coords += height / 2.f;
-        m_sceneObjects.push_back(std::make_shared<Snowman>(coords, diameter));
+        float speed = SnowSceneObject::getRandomSpeed();
+        glm::vec3 direction = SnowSceneObject::getRandomDirection();
+        m_sceneObjects.push_back(std::make_shared<Snowman>(coords, diameter, speed, direction));
     }
 }
 

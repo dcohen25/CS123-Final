@@ -45,6 +45,7 @@ INPUT(
 ./debug\test_SOIL.o
 ./debug\snowscenetextures.o
 ./debug\terrain.o
+./debug\ornament.o
 ./debug\qrc_resources.o
 ./debug\moc_mainwindow.o
 ./debug\moc_view.o

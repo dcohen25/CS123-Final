@@ -5,9 +5,9 @@
 #include "snowscenetile.h"
 
 Snow::Snow(glm::vec3 coords) :
-    SnowSceneObject(coords, SnowSceneTile::tileSize, SnowSceneTile::tileSize, 0)
+    SnowSceneObject(coords, SnowSceneTile::tileSize, SnowSceneTile::tileSize, 0, 0, glm::vec3(0))
 {
-    initSnow();
+    makeObject();
 }
 
 Snow::~Snow(){
@@ -25,7 +25,7 @@ void Snow::renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Sha
     shapes[m_snowPrimitive.type]->draw();
 }
 
-void Snow::initSnow(){
+void Snow::makeObject(){
     initSnowPrimitive();
     initSnowTransformation();
 }

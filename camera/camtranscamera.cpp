@@ -11,7 +11,7 @@
 CamtransCamera::CamtransCamera()
 {
     // @TODO: [CAMTRANS] Fill this in...
-    m_farPlane = 50.f;
+    m_farPlane = 20.f;
     m_nearPlane = .1f;
     m_heightAngle = 60 * (M_PI / 180.f);
     m_aspectRatio = 1;

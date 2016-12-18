@@ -7,11 +7,13 @@
 class Snowman : public SnowSceneObject
 {
 public:
-    Snowman(glm::vec3 coords, float diameter);
+    Snowman(glm::vec3 coords, float diameter, float speed, glm::vec3 direction);
     Snowman();
     ~Snowman();
 
     static float computeSnowmanHeight(float diameter);
+
+    virtual void makeObject() override;
 
     virtual void renderShadowScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) override;
     virtual void renderPhongScene(SnowSceneTextures textures, std::unique_ptr<CS123Shader> &shader, View *context, std::map<PrimitiveType, std::unique_ptr<OpenGLShape>> &shapes) override;
@@ -28,7 +30,6 @@ public:
     const static float m_heightNoseProportion;
 
 protected:
-    void initSnowman();
     void initSnowmanTop();
     void initSnowmanMiddle();
     void initSnowmanBottom();
@@ -91,6 +92,7 @@ protected:
     glm::mat4x4 m_topTransformation;
     glm::mat4x4 m_middleTransformation;
     glm::mat4x4 m_bottomTransformation;
+
 };
 
 

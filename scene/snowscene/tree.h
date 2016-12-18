@@ -23,8 +23,9 @@ public:
     const static float trunkHeightProportion;
     const static float topHeightProportion;
 
+    virtual void makeObject() override;
+
 private:
-    void initTree();
     void initTreeTop();
     void initTreeTrunk();
     void initTreeTopPrimitive();

@@ -14,8 +14,8 @@ using namespace CS123::GL;
 const int SnowScene::sceneRadius = 1;
 const int SnowScene::numLights = 1;
 
-const int SnowScene::screenWidth = 3840;
-const int SnowScene::screenHeight = 2160;
+const int SnowScene::screenWidth = 1920;
+const int SnowScene::screenHeight = 1200;
 
 SnowScene::SnowScene()
 {
@@ -328,6 +328,7 @@ void SnowScene::updateSceneMap(){
             if (isNewTile(tile)){
                 addTile(tile);
             }
+            m_sceneMap[x][z].updateSceneObjects();
         }
     }
 }
